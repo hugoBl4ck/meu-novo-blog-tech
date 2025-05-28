@@ -1,0 +1,36 @@
+# Hugo
+/public/
+/resources/
+.hugo_build.lock
+hugo_stats.json
+
+# Cache e artefatos do Hugo Modules
+
+.hugo\_cache/
+
+# Node.js
+
+node\_modules/
+npm-debug.log\*
+yarn-debug.log\*
+yarn-error.log\*
+package-lock.json \# Opcional: alguns preferem versionar, outros não. Se você versionar, Netlify pode usá-lo para instalações mais consistentes. Se não, Netlify usará o package.json.
+
+# Se você decidir NÃO versionar o package-lock.json, adicione-o aqui.
+
+# Por segurança e consistência de builds, geralmente é bom versionar o package-lock.json.
+
+# Arquivos específicos do sistema operacional
+
+.DS\_Store
+Thumbs.db
+
+# Arquivos de log genéricos
+
+\*.log
+
+# Arquivos de ambiente (se você usar .env files)
+
+.env
+.env.\*
+\!.env.example
