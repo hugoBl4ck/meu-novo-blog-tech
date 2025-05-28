@@ -42,7 +42,7 @@ Rodar LLMs localmente oferece vantagens significativas, essenciais para entusias
 
 ## LM Studio: A Porta de Entrada Simples para LLMs Locais
 
-<img src="images/posts/lmstudio-interface.png" alt="Interface amigável do LM Studio" style="max-width: 80%; height: auto; display: block; margin: 0 auto;">
+<img src="images/post/lmstudio-interface.png" alt="Interface amigável do LM Studio" style="max-width: 80%; height: auto; display: block; margin: 0 auto;">
 
 LM Studio é uma aplicação desktop gratuita que simplifica enormemente o processo de baixar e rodar LLMs em seu computador. Ele gerencia as complexidades de compatibilidade de hardware e formatos de modelo (como GGUF), tornando a experiência acessível até para iniciantes na área de IA e cibersegurança.
 
