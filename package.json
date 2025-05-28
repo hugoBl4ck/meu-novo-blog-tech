@@ -1,8 +1,17 @@
 {
+  "name": "meu-novo-blog-tailbliss",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
-    "autoprefixer": "^10.4.21",
-    "postcss": "^8.5.3",
-    "postcss-cli": "^11.0.1",
-    "tailwindcss": "^4.1.8"
+    "autoprefixer": "^10.4.19", // Use versões atuais
+    "postcss": "^8.4.38",    // Use versões atuais
+    "postcss-cli": "^10.1.0", // Use versões atuais
+    "tailwindcss": "^3.4.3"   // Use versões atuais
   }
 }
