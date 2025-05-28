@@ -1,187 +1,263 @@
-###############################################################################
+# -----------------------------------------------------------------------------
 # Configurações Base do Site
-###############################################################################
-baseURL = "/" # <<== MUDE ISTO
+# -----------------------------------------------------------------------------
+baseURL = "/" # Mantenha "/" por enquanto. Você atualizará para sua URL do Netlify depois do primeiro deploy bem-sucedido.
 languageCode = "pt-br"
-title = "Blog do Hugo Robot com TailBliss" # <<== MUDE ISTO
-theme = ["github.com/nusserstudios/tailbliss"]
+title = "Blog do Hugo Robot" # SEU TÍTULO PRINCIPAL
+DefaultContentLanguage = "pt" # Define português como padrão
+enableEmoji = true
+enableGitInfo = true       # Permite que o Hugo use informações do Git (ex: data da última modificação)
 enableRobotsTXT = true
-canonifyURLs = false # Geralmente false para desenvolvimento, true para produção se necessário
-# copyright = "© {year} Seu Nome. Todos os direitos reservados." # Exemplo, o tema pode ter seu próprio
+canonifyURLs = false       # Em produção, Netlify geralmente lida bem com isso. Pode mudar para true se necessário.
+paginate = 9             # Número de posts por página (o exemplo do TailBliss usa 6 ou 9)
 
-###############################################################################
-# Módulos Hugo (para o tema TailBliss e suas dependências)
-###############################################################################
+# O tema TailBliss especifica um arquivo JS para modo escuro em seus assets
+# Se você não for modificar este JS do tema, esta linha pode não ser necessária aqui,
+# pois o tema o carregará de seus próprios assets.
+# darkmode_js = ["assets/js/darkmode.js"] # Verifique se o tema espera isso ou se já faz automaticamente
+
+enableInlineShortcodes = true # Permite shortcodes dentro de parágrafos
+
+# -----------------------------------------------------------------------------
+# Módulos Hugo (Tema TailBliss)
+# -----------------------------------------------------------------------------
 [module]
+  # Hugo Version - O tema TailBliss especifica isso. Sua versão do Hugo (0.147.5) é compatível.
+  [module.hugoVersion]
+    extended = true
+    min = "0.114.0" # O exemplo do TailBliss usa 0.104.0, mas versões mais recentes são melhores.
+
+  # Importação do tema TailBliss
   [[module.imports]]
     path = "github.com/nusserstudios/tailbliss"
-    # Adicione as montagens abaixo para dar prioridade aos seus layouts
-    [[module.imports.mounts]]
-      source = "layouts" # Pasta 'layouts' do seu projeto
-      target = "layouts" # Monta sobre a pasta 'layouts' do tema
-    [[module.imports.mounts]]
-      source = "static"
-      target = "static"
-    [[module.imports.mounts]]
-      source = "assets"
-      target = "assets"
-    # Adicione outras pastas que você quer que tenham prioridade, como 'i18n', 'data', etc.
-    # A ideia é garantir que o conteúdo do seu projeto sobrescreva o do tema.
+    # NÃO vamos definir 'mounts' aqui por enquanto, para permitir que seus layouts locais
+    # (como layouts/partials/site/head.html ou layouts/posts/single.html)
+    # tenham prioridade sobre os do tema, que é o comportamento padrão.
+    # Se descobrirmos que o override não funciona, revisitaremos os mounts.
 
-###############################################################################
-# Configurações de Saída e Tipos de Mídia
-###############################################################################
+# -----------------------------------------------------------------------------
+# Configurações de Saída
+# -----------------------------------------------------------------------------
 [outputs]
-  home = ["HTML", "RSS", "JSON"] # Comum para temas modernos
+  home = ["HTML", "RSS"] # JSON removido por enquanto para evitar o WARN. Adicione se precisar para busca.
   section = ["HTML", "RSS"]
   taxonomy = ["HTML", "RSS"]
   term = ["HTML", "RSS"]
 
-[mediaTypes]
-  [mediaTypes."application/manifest+json"]
-    suffixes = ["webmanifest"]
-
-[outputFormats]
-  [outputFormats.WebAppManifest]
-    mediaType = "application/manifest+json"
-    rel = "manifest"
-
-###############################################################################
-# Configurações de Build (Importante para Tailwind CSS com Hugo)
-###############################################################################
+# -----------------------------------------------------------------------------
+# Configurações de Build (Importante para Tailwind CSS)
+# -----------------------------------------------------------------------------
 [build]
-  writeStats = true # Necessário para PostCSS/Tailwind processar apenas o CSS usado
+  writeStats = true # Necessário para PostCSS/Tailwind
   [build.buildStats]
     enable = true
-  [[build.cachebusters]] # Para invalidar cache do CSS principal quando ele muda
+  # Cachebusters (o exemplo do TailBliss tinha isso, é uma boa prática)
+  [[build.cachebusters]]
     source = "assets/.*postcss"
     target = "css"
   [[build.cachebusters]]
     source = "assets/.*(svg|js|css|png|jpg|jpeg|webp|gif)"
     target = "(svg|js|css|png|jpg|jpeg|webp|gif)"
 
-###############################################################################
-# Parâmetros Específicos do Tema (params) e do Site
-###############################################################################
-[params]
-  # Informações básicas do site/autor (adapte conforme o tema TailBliss usa)
-  title = "Blog do Hugo Robot com TailBliss" # <<== MUDE ISTO (pode ser usado pelo tema)
-  author = "Hugo Robot" # <<== MUDE ISTO
-  description = "Explorando tecnologia, LLMs e cibersegurança com o tema TailBliss." # <<== MUDE ISTO
-  # logo = "images/logo.png" # Exemplo, se o tema suportar um logo
-
-  # Configurações de Data
-  DateFormat = "2 de Janeiro de 2006"
-
-  # Configurações de Imagem Principal para Open Graph e Twitter Cards
-  images = ["images/site_preview.jpg"] # <<== CRIE E MUDE ISTO (imagem geral do site para compartilhamento)
-
-  # Exemplo de Configuração de Favicon (o tema pode ter sua própria maneira)
-  # favicon = "/favicon.ico"
-  # favicon16x16 = "/favicon-16x16.png"
-  # favicon32x32 = "/favicon-32x32.png"
-  # apple_touch_icon = "/apple-touch-icon.png"
-  # safari_pinned_tab = "/safari-pinned-tab.svg"
-
-  # Parâmetros específicos do TailBliss (CONSULTE A DOCUMENTAÇÃO DO TEMA!)
-  # O TailBliss usa Tailwind, então cores e fontes são geralmente customizadas
-  # via tailwind.config.js ou CSS customizado que sobrescreve as classes do Tailwind.
-  # Verifique se o tema oferece params para configurações rápidas de tema claro/escuro.
-  # Exemplo do config.yaml do TailBliss:
-  #   mainSections = ['posts', 'docs']
-  #   showReadingTime = true
-  #   showShareButtons = true
-  #   showPostNavLinks = true
-  #   showBreadcrumbs = true
-  #   showCodeCopyButtons = true
-  #   showToc = true
-  #   tocOpen = true
-  #   showWordCount = true
-  #   search = false # ou true, se o tema tiver busca
-
-  mainSections = ["posts"] # Seus posts provavelmente estão aqui
-  ShowReadingTime = true
-  ShowShareButtons = true # Verifique se o TailBliss tem isso e como configurar os botões
-
-  # CSS e JS Customizados
-  # Mesmo com Tailwind, você pode querer um CSS customizado para overrides finais.
-  # O tema pode ou não usar estes params específicos. Se não, usaremos extend_head.html.
-  # custom_css = ["css/custom.css"]
-  # custom_js = ["js/custom.js"]
-
-  # Comentários (Giscus)
-  comments = true # Habilita a lógica de comentários (se você criar o partial)
-  [params.giscus]
-    repo = "hugoBl4ck/meu-novo-blog-tech"  # <== SEU REPO NOVO
-    repoId = "R_kgDOOyHVPw"                 # <== SEU NOVO REPO ID
-    category = "Announcements"              # Sua categoria
-    categoryId = "DIC_kwDOOyHVP84CqssS"     # <== SEU NOVO CATEGORY ID
-    mapping = "url"                         # Você tinha "url", pode ser "pathname" também, sua escolha
-    strict = "0"
-    reactionsEnabled = "1"
-    emitMetadata = "0"
-    inputPosition = "bottom"                # Você tinha "bottom", pode ser "top"
-    theme = "preferred_color_scheme"
-    lang = "pt"
-    loading = "lazy"
-
-  # Redes Sociais (adapte à estrutura do TailBliss)
-  # O TailBliss pode ter uma forma diferente, veja o config.yaml dele.
-  # Exemplo baseado no config.yaml do TailBliss:
-  # social = [
-  #   { name = "github", url = "https://github.com/SEU_USUARIO_GITHUB" },
-  #   { name = "twitter", url = "https://twitter.com/SEU_TWITTER" },
-  # ]
-
-###############################################################################
-# Configuração de Menu Principal
-###############################################################################
-[[menu.main]]
-  identifier = "home"
-  name = "Início"
-  url = "/"
-  weight = 10
-[[menu.main]]
-  identifier = "posts"
-  name = "Posts"
-  url = "/posts/" # Ou o nome da sua seção de posts
-  weight = 20
-# [[menu.main]]
-#   identifier = "sobre"
-#   name = "Sobre Mim"
-#   url = "/about/"
-#   weight = 30
-# [[menu.main]]
-#   name = "Tags"
-#   url = "/tags/"
-#   weight = 40
-# [[menu.main]]
-#   name = "Categorias"
-#   url = "/categories/"
-#   weight = 50
-
-###############################################################################
+# -----------------------------------------------------------------------------
 # Configurações de Markdown (Goldmark)
-###############################################################################
+# -----------------------------------------------------------------------------
 [markup]
-  [markup.goldmark.renderer]
-    unsafe = true # Permite HTML bruto dentro do Markdown (necessário para algumas customizações, como atributos data-aos)
+  [markup.goldmark]
+    [markup.goldmark.extensions]
+      definitionList = true
+      footnote = true
+      linkify = true
+      linkifyProtocol = "https"
+      strikethrough = true
+      table = true
+      taskList = true
+      [markup.goldmark.extensions.typographer]
+        apostrophe = "&rsquo;"
+        disable = false
+        ellipsis = "&hellip;"
+        emDash = "&mdash;"
+        enDash = "&ndash;"
+        leftAngleQuote = "&laquo;"
+        leftDoubleQuote = "&ldquo;"
+        leftSingleQuote = "&lsquo;"
+        rightAngleQuote = "&raquo;"
+        rightDoubleQuote = "&rdquo;"
+        rightSingleQuote = "&rsquo;"
+    [markup.goldmark.parser]
+      attribute = true # Habilita atributos em Markdown (ex: para classes, data-aos)
+      autoHeadingID = true
+      autoHeadingIDType = "github"
+    [markup.goldmark.renderer]
+      unsafe = true # PERMITE HTML BRUTO NO MARKDOWN (necessário para data-aos em spans, etc.)
+      xhtml = false
   [markup.highlight]
     # codeFences = true (padrão)
     # guessSyntax = false (padrão)
-    # hl_Lines = "" (padrão)
-    # lineNoStart = 1 (padrão)
-    # lineNos = false (padrão) (mude para true se quiser números de linha nos blocos de código)
-    # style = "monokai" (padrão, muitos outros estilos disponíveis)
-    noClasses = false # Importante para o CSS do PaperMod (e talvez TailBliss) aplicar estilos de código
+    # lineNos = false (padrão) # Mude para true se quiser números de linha
+    style = "monokai" # Estilo de destaque de código (TailBliss pode ter o seu próprio via Tailwind/PrismJS)
+    noClasses = false # Importante para CSS de temas aplicar estilos
 
-###############################################################################
-# Taxonomias (se o tema as usar de forma padrão)
-###############################################################################
+# -----------------------------------------------------------------------------
+# Parâmetros do Site e Específicos do Tema (params)
+# -----------------------------------------------------------------------------
+[params]
+  author = "Hugo Robot" # <<== SEU NOME DE AUTOR
+  # authorimage = "/images/seu-avatar.webp" # Caminho para sua imagem de autor em static/images/
+  og_image = "/images/blog-preview.jpg" # <<== CRIE UMA IMAGEM DE PRÉVIA (ex: 1200x630px) em static/images/
+  moto = "Explorando LLMs, Cibersegurança e Tecnologia" # Seu slogan ou subtítulo
+  description = "Um blog dedicado a desvendar o mundo da Inteligência Artificial local, segurança da informação, CVEs e as últimas novidades em tecnologia." # <<== SUA DESCRIÇÃO
+  
+  disable_theme_toggle = false # Permite o botão de alternar tema claro/escuro
+  disable_stay_uptodate = true # true para esconder a seção de "Stay up to date" (newsletter) do tema, se não for usar
+
+  DateFormat = "2 de Janeiro de 2006"
+  mainSections = ["posts"] # Diz ao tema que seus posts principais estão em content/posts/
+  ShowReadingTime = true
+  # ShowShareButtons = true # Descomente se você implementar os botões de compartilhamento e o partial social_share_buttons.html
+  # showPostNavLinks = true # Para links "Próximo/Anterior" nos posts
+  # showBreadcrumbs = true # Para migalhas de pão
+  # showCodeCopyButtons = true # O tema pode ter isso integrado
+  # showToc = true # Para mostrar o índice (Table of Contents) nos posts
+  # tocOpen = false # Se o índice deve vir aberto ou fechado por padrão
+
+  # Seções da Página Inicial (baseado na estrutura p1, p2, etc. do TailBliss exampleSite)
+  # Adapte estas seções com SEU conteúdo. Remova as que não quiser.
+  # As imagens são relativas à pasta static/. Ex: "images/home/missao.jpg" -> static/images/home/missao.jpg
+  
+  [params.p1] # Exemplo: Seção "Nossa Missão" ou "Sobre o Blog"
+    heading = "Explorando a Fronteira Digital"
+    image = "/images/home/intro-image.jpg" # <<== CRIE ESTA IMAGEM
+    altText = "Imagem representando tecnologia e exploração"
+    content = [
+      { text = "Bem-vindo ao meu laboratório de ideias! Aqui compartilho minhas explorações no universo da Inteligência Artificial Local, os desafios da Cibersegurança e as últimas descobertas sobre Vulnerabilidades e CVEs." },
+      { text = "Junte-se a mim enquanto desvendamos juntos as complexidades da tecnologia moderna, com foco em privacidade, controle e inovação sem amarras." }
+    ]
+
+  [params.p4] # O exampleSite usa p4 para "From the blog" - o tema deve listar os posts automaticamente
+    heading = "Do Meu Diário de Bordo Digital"
+    content = [
+      { text = "Confira os artigos mais recentes onde mergulho em tutoriais, análises e reflexões sobre o mundo tech." }
+    ]
+  
+  # Você pode adicionar ou remover seções p2, p3, p5 conforme a estrutura do TailBliss
+  # e o que você quer na sua página inicial. Por exemplo, para remover a seção p5 (Stay Up to Date):
+  # disable_stay_uptodate = true (já coloquei acima)
+
+  # Redes Sociais (Estrutura do TailBliss exampleSite)
+  # [[params.social_media]] # Descomente e configure se quiser usar
+  #   name = "github" # Nome do ícone (o tema deve ter os SVGs ou usar Font Awesome)
+  #   url = "https://github.com/hugoBl4ck" # <<== SEU GITHUB
+  #   enabled = true
+  # [[params.social_media]]
+  #   name = "linkedin"
+  #   url = "https://linkedin.com/in/SEU_LINKEDIN" # <<== SEU LINKEDIN
+  #   enabled = true
+  # [[params.social_media]]
+  #   name = "twitter"
+  #   url = "https://twitter.com/SEU_TWITTER" # <<== SEU TWITTER
+  #   enabled = true
+  
+  # Comentários (Giscus)
+  comments = true
+  [params.giscus]
+    repo = "hugoBl4ck/meu-novo-blog-tech"  # Confirme se este é o nome final do seu novo repo
+    repoId = "R_kgDOOyHVPw"                 # ID do Repositório (que você já tem)
+    category = "Announcements"             # Categoria nas Discussões do GitHub
+    categoryId = "DIC_kwDOOyHVP84CqssS"     # ID da Categoria (que você já tem)
+    mapping = "url"
+    strict = "0"
+    reactionsEnabled = "1"
+    emitMetadata = "0"
+    inputPosition = "bottom"
+    theme = "preferred_color_scheme"
+    lang = "pt"
+    loading = "lazy"
+    title = "Deixe seu comentário!" # Título para a seção de comentários
+
+# -----------------------------------------------------------------------------
+# Configuração de Menu
+# -----------------------------------------------------------------------------
+[menu]
+  [[menu.main]]
+    identifier = "home"
+    name = "Início"
+    url = "/"
+    weight = 10
+  [[menu.main]]
+    identifier = "posts"
+    name = "Todos os Posts"
+    url = "/posts/"
+    weight = 20
+  [[menu.main]]
+    identifier = "sobre"
+    name = "Sobre Mim"
+    url = "/about/" # <<== CRIE A PÁGINA content/about.md
+    weight = 30
+  # [[menu.main]] # Exemplo de menu dropdown que o TailBliss suporta
+  #   identifier = "ferramentas"
+  #   name = "Ferramentas"
+  #   pre = "dropdown" # Indica que é um dropdown
+  #   weight = 40
+  # [[menu.tools]] # Itens para o dropdown "ferramentas" (o identificador aqui deve ser o mesmo do 'pre' acima)
+  #   identifier = "llms"
+  #   name = "LLMs Locais"
+  #   url = "/tags/llms/"
+  #   weight = 1
+  # [[menu.tools]]
+  #   identifier = "seguranca"
+  #   name = "Segurança"
+  #   url = "/categories/ciberseguranca/"
+  #   weight = 2
+
+  [[menu.footer]] # Menu para o rodapé (exemplo do TailBliss)
+    name = "Contato"
+    url = "/contact/" # <<== CRIE A PÁGINA content/contact.md
+    weight = 50
+
+# -----------------------------------------------------------------------------
+# Taxonomias
+# -----------------------------------------------------------------------------
 [taxonomies]
-  category = "categories"
-  tag = "tags"
-  series = "series"
-  # Adicione outras taxonomias que o tema possa usar ou que você queira
-[pagination]
-  pagerSize = 10
+  category = "categories" # Plural
+  tag = "tags"          # Plural
+  series = "series"       # Plural
+
+# -----------------------------------------------------------------------------
+# Configurações de Privacidade (Exemplo do TailBliss, ajuste conforme necessário)
+# -----------------------------------------------------------------------------
+[privacy]
+  [privacy.disqus]
+    disable = true # Desabilitar Disqus se estiver usando Giscus
+  [privacy.googleAnalytics]
+    # anonymizeIP = true
+    disable = true # Desabilitar se não usar GA
+    # respectDoNotTrack = false
+    # useSessionStorage = false
+  [privacy.instagram]
+    disable = true
+    # simple = false
+  [privacy.twitter]
+    disable = true # Desabilitar se não usar Twitter embeds que precisam de JS
+    # enableDNT = false
+    # simple = false
+  [privacy.vimeo]
+    disable = true
+    # enableDNT = false
+    # simple = false
+  [privacy.youtube]
+    disable = false # Deixe false se for usar vídeos do YouTube
+    privacyEnhanced = true # Recomenda usar o modo de privacidade avançada do YouTube
+
+# -----------------------------------------------------------------------------
+# Configurações do Servidor de Desenvolvimento (Opcional)
+# -----------------------------------------------------------------------------
+# [server] # Configurações para 'hugo server'
+#   [[server.headers]]
+#     for = "/**"
+#     [server.headers.values]
+#       Referrer-Policy = "strict-origin-when-cross-origin"
+      # X-Frame-Options = "DENY"
+      # X-Content-Type-Options = "nosniff"
+      # X-XSS-Protection = "1; mode=block"
+      # Content-Security-Policy = "script-src 'self' https://giscus.app;" # Exemplo de CSP básica
