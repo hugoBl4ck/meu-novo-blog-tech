@@ -1,0 +1,25 @@
+/* Em assets/css/custom.css */
+body {
+    
+}
+
+.prose img { /* Imagens dentro da área de conteúdo estilizada pelo 'prose' */
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.prose img:hover {
+    transform: scale(1.03);
+    opacity: 0.85;
+}
+.prose h1, .prose dark:h1,
+.prose h2, .prose dark:h2,
+.prose h3, .prose dark:h3 {
+    /* Cor para modo claro (exemplo: um cinza escuro suave) */
+    color: #374151; /* Cor: gray-700 do Tailwind */
+}
+
+/* Se o tema usar a classe 'dark' no body ou html para modo escuro */
+.dark .prose h1, .dark .prose h2, .dark .prose h3 {
+    /* Cor para modo escuro (exemplo: um cinza claro) */
+    color: #d1d5db; /* Cor: gray-300 do Tailwind */
+}

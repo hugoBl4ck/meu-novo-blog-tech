@@ -15,7 +15,18 @@ canonifyURLs = false # Geralmente false para desenvolvimento, true para produç�
 [module]
   [[module.imports]]
     path = "github.com/nusserstudios/tailbliss"
-  # O TailBliss usa hugo-mod-jslibs, que pode trazer outras dependências automaticamente
+    # Adicione as montagens abaixo para dar prioridade aos seus layouts
+    [[module.imports.mounts]]
+      source = "layouts" # Pasta 'layouts' do seu projeto
+      target = "layouts" # Monta sobre a pasta 'layouts' do tema
+    [[module.imports.mounts]]
+      source = "static"
+      target = "static"
+    [[module.imports.mounts]]
+      source = "assets"
+      target = "assets"
+    # Adicione outras pastas que você quer que tenham prioridade, como 'i18n', 'data', etc.
+    # A ideia é garantir que o conteúdo do seu projeto sobrescreva o do tema.
 
 ###############################################################################
 # Configurações de Saída e Tipos de Mídia
