@@ -101,16 +101,16 @@ canonifyURLs = false # Geralmente false para desenvolvimento, true para produç�
   # Comentários (Giscus)
   comments = true # Habilita a lógica de comentários (se você criar o partial)
   [params.giscus]
-    repo = "hugoBl4ck/NOME_DO_SEU_NOVO_REPO" # <<== MUDE ISTO
-    repoId = "SEU_ID_DE_REPOSITORIO_DO_GISCUS"    # <<== MUDE ISTO
-    category = "Announcements"                  # Nome da categoria de Discussões no GitHub
-    categoryId = "SEU_ID_DE_CATEGORIA_DO_GISCUS" # <<== MUDE ISTO
-    mapping = "pathname"                        # ou "url", "title", "og:title"
+    repo = "hugoBl4ck/meu-novo-blog-tech"  # <== SEU REPO NOVO
+    repoId = "R_kgDOOyHVPw"                 # <== SEU NOVO REPO ID
+    category = "Announcements"              # Sua categoria
+    categoryId = "DIC_kwDOOyHVP84CqssS"     # <== SEU NOVO CATEGORY ID
+    mapping = "url"                         # Você tinha "url", pode ser "pathname" também, sua escolha
     strict = "0"
     reactionsEnabled = "1"
     emitMetadata = "0"
-    inputPosition = "bottom"                    # "top" ou "bottom"
-    theme = "preferred_color_scheme"            # ou "light", "dark_dimmed", etc.
+    inputPosition = "bottom"                # Você tinha "bottom", pode ser "top"
+    theme = "preferred_color_scheme"
     lang = "pt"
     loading = "lazy"
 
