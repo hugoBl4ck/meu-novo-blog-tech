@@ -1,34 +1,34 @@
 {{- /* layouts/partials/comments.html */ -}}
 {{/* Verifica se os comentários estão habilitados globalmente E para este tipo de página E não desabilitados no front matter do post */}}
-{{ if and .Site.Params.comments (eq .Type .Site.Params.mainSections | or (eq .Type &quot;posts&quot;) | or (eq .Type &quot;blog&quot;)) (ne .Params.comments false) }}
+{{ if and .Site.Params.comments (eq .Type .Site.Params.mainSections | or (eq .Type "posts") | or (eq .Type "blog")) (ne .Params.comments false) }}
     {{ if .Site.Params.giscus.repo }}
-        &lt;div class=&quot;comments giscus&quot; style=&quot;margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border);&quot;&gt;
-            &lt;h3&gt;{{ .Site.Params.giscus.title | default &quot;Comentários&quot; }}&lt;/h3&gt;
-            &lt;script src=&quot;https://giscus.app/client.js&quot;
-                    data-repo=&quot;{{ .Site.Params.giscus.repo }}&quot;
-                    data-repo-id=&quot;{{ .Site.Params.giscus.repoId }}&quot;
-                    data-category=&quot;{{ .Site.Params.giscus.category }}&quot;
-                    data-category-id=&quot;{{ .Site.Params.giscus.categoryId }}&quot;
-                    data-mapping=&quot;{{ .Site.Params.giscus.mapping | default &quot;pathname&quot; }}&quot;
-                    data-strict=&quot;{{ .Site.Params.giscus.strict | default &quot;0&quot; }}&quot;
-                    data-reactions-enabled=&quot;{{ .Site.Params.giscus.reactionsEnabled | default &quot;1&quot; }}&quot;
-                    data-emit-metadata=&quot;{{ .Site.Params.giscus.emitMetadata | default &quot;0&quot; }}&quot;
-                    data-input-position=&quot;{{ .Site.Params.giscus.inputPosition | default &quot;bottom&quot; }}&quot;
-                    data-theme=&quot;{{ .Site.Params.giscus.theme | default &quot;preferred_color_scheme&quot; }}&quot;
-                    data-lang=&quot;{{ .Site.Params.giscus.lang | default &quot;pt&quot; }}&quot;
-                    data-loading=&quot;{{ .Site.Params.giscus.loading | default &quot;lazy&quot; }}&quot;
-                    crossorigin=&quot;anonymous&quot;
-                    async&gt;
-            &lt;/script&gt;
+        <div class="comments giscus" style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
+            <h3>{{ .Site.Params.giscus.title | default "Comentários" }}</h3>
+            <script src="https://giscus.app/client.js"
+                    data-repo="{{ .Site.Params.giscus.repo }}"
+                    data-repo-id="{{ .Site.Params.giscus.repoId }}"
+                    data-category="{{ .Site.Params.giscus.category }}"
+                    data-category-id="{{ .Site.Params.giscus.categoryId }}"
+                    data-mapping="{{ .Site.Params.giscus.mapping | default "pathname" }}"
+                    data-strict="{{ .Site.Params.giscus.strict | default "0" }}"
+                    data-reactions-enabled="{{ .Site.Params.giscus.reactionsEnabled | default "1" }}"
+                    data-emit-metadata="{{ .Site.Params.giscus.emitMetadata | default "0" }}"
+                    data-input-position="{{ .Site.Params.giscus.inputPosition | default "bottom" }}"
+                    data-theme="{{ .Site.Params.giscus.theme | default "preferred_color_scheme" }}"
+                    data-lang="{{ .Site.Params.giscus.lang | default "pt" }}"
+                    data-loading="{{ .Site.Params.giscus.loading | default "lazy" }}"
+                    crossorigin="anonymous"
+                    async>
+            </script>
             {{/* Adicione um link para as discussões se o usuário quiser abrir no GitHub */}}
-            &lt;noscript&gt;Por favor, habilite o JavaScript para ver os &lt;a href=&quot;https://giscus.app&quot;&gt;comentários do Giscus.&lt;/a&gt;&lt;/noscript&gt;
-            &lt;p style=&quot;font-size: 0.9rem; margin-top: 1rem;&quot;&gt;
-                &lt;a href=&quot;https://github.com/{{ .Site.Params.giscus.repo }}/discussions&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;
+            <noscript>Por favor, habilite o JavaScript para ver os <a href="https://giscus.app">comentários do Giscus.</a></noscript>
+            <p style="font-size: 0.9rem; margin-top: 1rem;">
+                <a href="https://github.com/{{ .Site.Params.giscus.repo }}/discussions" target="_blank" rel="noopener noreferrer">
                     Ver discussões no GitHub
-                &lt;/a&gt;
-            &lt;/p&gt;
-        &lt;/div&gt;
+                </a>
+            </p>
+        </div>
     {{ else }}
-        &lt;p&gt;A configuração de comentários (Giscus) está ausente no arquivo de configuração do site (hugo.toml).&lt;/p&gt;
+        <p>A configuração de comentários (Giscus) está ausente no arquivo de configuração do site (hugo.toml).</p>
     {{ end }}
 {{ end }}
