@@ -1,38 +1,176 @@
-baseURL = "https://elaborate-scone-2651ee.netlify.app/" 
+###############################################################################
+# Configurações Base do Site
+###############################################################################
+baseURL = "/" # <<== MUDE ISTO
 languageCode = "pt-br"
-title = "Hugo Robot Blog" 
+title = "Blog do Hugo Robot com TailBliss" # <<== MUDE ISTO
 theme = ["github.com/nusserstudios/tailbliss"]
-
-paginate = 10
-
 enableRobotsTXT = true
+canonifyURLs = false # Geralmente false para desenvolvimento, true para produção se necessário
+# copyright = "© {year} Seu Nome. Todos os direitos reservados." # Exemplo, o tema pode ter seu próprio
 
-# Configuração para o módulo do tema TailBliss
+###############################################################################
+# Módulos Hugo (para o tema TailBliss e suas dependências)
+###############################################################################
 [module]
   [[module.imports]]
     path = "github.com/nusserstudios/tailbliss"
+  # O TailBliss usa hugo-mod-jslibs, que pode trazer outras dependências automaticamente
 
+###############################################################################
+# Configurações de Saída e Tipos de Mídia
+###############################################################################
+[outputs]
+  home = ["HTML", "RSS", "JSON"] # Comum para temas modernos
+  section = ["HTML", "RSS"]
+  taxonomy = ["HTML", "RSS"]
+  term = ["HTML", "RSS"]
+
+[mediaTypes]
+  [mediaTypes."application/manifest+json"]
+    suffixes = ["webmanifest"]
+
+[outputFormats]
+  [outputFormats.WebAppManifest]
+    mediaType = "application/manifest+json"
+    rel = "manifest"
+
+###############################################################################
+# Configurações de Build (Importante para Tailwind CSS com Hugo)
+###############################################################################
+[build]
+  writeStats = true # Necessário para PostCSS/Tailwind processar apenas o CSS usado
+  [build.buildStats]
+    enable = true
+  [[build.cachebusters]] # Para invalidar cache do CSS principal quando ele muda
+    source = "assets/.*postcss"
+    target = "css"
+  [[build.cachebusters]]
+    source = "assets/.*(svg|js|css|png|jpg|jpeg|webp|gif)"
+    target = "(svg|js|css|png|jpg|jpeg|webp|gif)"
+
+###############################################################################
+# Parâmetros Específicos do Tema (params) e do Site
+###############################################################################
 [params]
-  # Estes são exemplos baseados no exampleSite do TailBliss.
-  # Você precisará consultar a documentação do TailBliss para todas as opções.
-  title = "Hugo Robot Blog" # Usado em alguns lugares pelo tema
-  author = "Hugo Robot"
-  description = "Descrição do seu novo blog."
-  # copyright = "© {2025} Hugo Robot" # O tema pode ter algo assim
+  # Informações básicas do site/autor (adapte conforme o tema TailBliss usa)
+  title = "Blog do Hugo Robot com TailBliss" # <<== MUDE ISTO (pode ser usado pelo tema)
+  author = "Hugo Robot" # <<== MUDE ISTO
+  description = "Explorando tecnologia, LLMs e cibersegurança com o tema TailBliss." # <<== MUDE ISTO
+  # logo = "images/logo.png" # Exemplo, se o tema suportar um logo
 
-  # Configurações para modo escuro (TailBliss usa Tailwind, que tem bom suporte a isso)
-  # O tema provavelmente detecta a preferência do sistema ou permite um toggle.
-  # Verifique a documentação do tema para "darkMode" ou "theme_switcher".
-  # Exemplo genérico, pode não ser o do TailBliss:
-  # defaultTheme = "dark" # ou "light", "auto"
-  # theme_switcher = true
+  # Configurações de Data
+  DateFormat = "2 de Janeiro de 2006"
 
-  # Redes Sociais - o TailBliss provavelmente tem uma forma específica para isso
-  # [[params.social]]
-  #   name = "github"
-  #   url = "https://github.com/SEU_USUARIO_GITHUB"
-  # [[params.social]]
-  #   name = "linkedin"
-  #   url = "https://linkedin.com/in/SEU_LINKEDIN"
+  # Configurações de Imagem Principal para Open Graph e Twitter Cards
+  images = ["images/site_preview.jpg"] # <<== CRIE E MUDE ISTO (imagem geral do site para compartilhamento)
 
-# Configuração de Menu (exemplo, adapte conforme o tema)
+  # Exemplo de Configuração de Favicon (o tema pode ter sua própria maneira)
+  # favicon = "/favicon.ico"
+  # favicon16x16 = "/favicon-16x16.png"
+  # favicon32x32 = "/favicon-32x32.png"
+  # apple_touch_icon = "/apple-touch-icon.png"
+  # safari_pinned_tab = "/safari-pinned-tab.svg"
+
+  # Parâmetros específicos do TailBliss (CONSULTE A DOCUMENTAÇÃO DO TEMA!)
+  # O TailBliss usa Tailwind, então cores e fontes são geralmente customizadas
+  # via tailwind.config.js ou CSS customizado que sobrescreve as classes do Tailwind.
+  # Verifique se o tema oferece params para configurações rápidas de tema claro/escuro.
+  # Exemplo do config.yaml do TailBliss:
+  #   mainSections = ['posts', 'docs']
+  #   showReadingTime = true
+  #   showShareButtons = true
+  #   showPostNavLinks = true
+  #   showBreadcrumbs = true
+  #   showCodeCopyButtons = true
+  #   showToc = true
+  #   tocOpen = true
+  #   showWordCount = true
+  #   search = false # ou true, se o tema tiver busca
+
+  mainSections = ["posts"] # Seus posts provavelmente estão aqui
+  ShowReadingTime = true
+  ShowShareButtons = true # Verifique se o TailBliss tem isso e como configurar os botões
+
+  # CSS e JS Customizados
+  # Mesmo com Tailwind, você pode querer um CSS customizado para overrides finais.
+  # O tema pode ou não usar estes params específicos. Se não, usaremos extend_head.html.
+  # custom_css = ["css/custom.css"]
+  # custom_js = ["js/custom.js"]
+
+  # Comentários (Giscus)
+  comments = true # Habilita a lógica de comentários (se você criar o partial)
+  [params.giscus]
+    repo = "hugoBl4ck/NOME_DO_SEU_NOVO_REPO" # <<== MUDE ISTO
+    repoId = "SEU_ID_DE_REPOSITORIO_DO_GISCUS"    # <<== MUDE ISTO
+    category = "Announcements"                  # Nome da categoria de Discussões no GitHub
+    categoryId = "SEU_ID_DE_CATEGORIA_DO_GISCUS" # <<== MUDE ISTO
+    mapping = "pathname"                        # ou "url", "title", "og:title"
+    strict = "0"
+    reactionsEnabled = "1"
+    emitMetadata = "0"
+    inputPosition = "bottom"                    # "top" ou "bottom"
+    theme = "preferred_color_scheme"            # ou "light", "dark_dimmed", etc.
+    lang = "pt"
+    loading = "lazy"
+
+  # Redes Sociais (adapte à estrutura do TailBliss)
+  # O TailBliss pode ter uma forma diferente, veja o config.yaml dele.
+  # Exemplo baseado no config.yaml do TailBliss:
+  # social = [
+  #   { name = "github", url = "https://github.com/SEU_USUARIO_GITHUB" },
+  #   { name = "twitter", url = "https://twitter.com/SEU_TWITTER" },
+  # ]
+
+###############################################################################
+# Configuração de Menu Principal
+###############################################################################
+[[menu.main]]
+  identifier = "home"
+  name = "Início"
+  url = "/"
+  weight = 10
+[[menu.main]]
+  identifier = "posts"
+  name = "Posts"
+  url = "/posts/" # Ou o nome da sua seção de posts
+  weight = 20
+# [[menu.main]]
+#   identifier = "sobre"
+#   name = "Sobre Mim"
+#   url = "/about/"
+#   weight = 30
+# [[menu.main]]
+#   name = "Tags"
+#   url = "/tags/"
+#   weight = 40
+# [[menu.main]]
+#   name = "Categorias"
+#   url = "/categories/"
+#   weight = 50
+
+###############################################################################
+# Configurações de Markdown (Goldmark)
+###############################################################################
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true # Permite HTML bruto dentro do Markdown (necessário para algumas customizações, como atributos data-aos)
+  [markup.highlight]
+    # codeFences = true (padrão)
+    # guessSyntax = false (padrão)
+    # hl_Lines = "" (padrão)
+    # lineNoStart = 1 (padrão)
+    # lineNos = false (padrão) (mude para true se quiser números de linha nos blocos de código)
+    # style = "monokai" (padrão, muitos outros estilos disponíveis)
+    noClasses = false # Importante para o CSS do PaperMod (e talvez TailBliss) aplicar estilos de código
+
+###############################################################################
+# Taxonomias (se o tema as usar de forma padrão)
+###############################################################################
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+  series = "series"
+  # Adicione outras taxonomias que o tema possa usar ou que você queira
+[pagination]
+  pagerSize = 10
