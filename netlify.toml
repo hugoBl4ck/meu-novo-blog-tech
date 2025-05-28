@@ -1,0 +1,10 @@
+[build]
+  command = "hugo --gc --minify"
+  publish = "public"
+
+[build.environment]
+  HUGO_VERSION = "0.147.5" # <== Use a versão mais recente do Hugo que você está usando localmente ou uma recente compatível.
+  # HUGO_ENABLE_GIT_INFO = "true" # Descomente se seu tema precisar de informações do Git
+
+[context.production.environment]
+  HUGO_ENV = "production"
