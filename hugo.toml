@@ -1,0 +1,38 @@
+baseURL = "https://elaborate-scone-2651ee.netlify.app/" 
+languageCode = "pt-br"
+title = "Hugo Robot Blog" 
+theme = ["github.com/nusserstudios/tailbliss"]
+
+paginate = 10
+
+enableRobotsTXT = true
+
+# Configuração para o módulo do tema TailBliss
+[module]
+  [[module.imports]]
+    path = "github.com/nusserstudios/tailbliss"
+
+[params]
+  # Estes são exemplos baseados no exampleSite do TailBliss.
+  # Você precisará consultar a documentação do TailBliss para todas as opções.
+  title = "Hugo Robot Blog" # Usado em alguns lugares pelo tema
+  author = "Hugo Robot"
+  description = "Descrição do seu novo blog."
+  # copyright = "© {2025} Hugo Robot" # O tema pode ter algo assim
+
+  # Configurações para modo escuro (TailBliss usa Tailwind, que tem bom suporte a isso)
+  # O tema provavelmente detecta a preferência do sistema ou permite um toggle.
+  # Verifique a documentação do tema para "darkMode" ou "theme_switcher".
+  # Exemplo genérico, pode não ser o do TailBliss:
+  # defaultTheme = "dark" # ou "light", "auto"
+  # theme_switcher = true
+
+  # Redes Sociais - o TailBliss provavelmente tem uma forma específica para isso
+  # [[params.social]]
+  #   name = "github"
+  #   url = "https://github.com/SEU_USUARIO_GITHUB"
+  # [[params.social]]
+  #   name = "linkedin"
+  #   url = "https://linkedin.com/in/SEU_LINKEDIN"
+
+# Configuração de Menu (exemplo, adapte conforme o tema)
