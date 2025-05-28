@@ -1,0 +1,9 @@
+/* static/css/custom.css */
+body {
+    border: 15px solid limegreen !important;
+    background-color: #333 !important; /* Um cinza escuro para teste */
+}
+
+h1, h2 {
+    color: yellow !important;
+}

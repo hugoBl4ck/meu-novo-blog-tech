@@ -1,0 +1,38 @@
+{{- /* layouts/partials/extend_head.html */ -}}
+
+{{/* Bloco para carregar seu custom.css */}}
+{{ $customCSSPath := "css/custom.css" }} {{/* Define o caminho padrão para seu custom.css */}}
+{{ $paramsCustomCSS := .Site.Params.custom_css }}
+
+{{/* Verifica se o parâmetro custom_css existe no hugo.toml e não está vazio */}}
+{{ if $paramsCustomCSS }}
+    {{/* Se o parâmetro for uma string, transforma em uma lista de um item */}}
+    {{ if (reflect.IsSlice $paramsCustomCSS) }}
+        {{/* Já é uma lista, não faz nada */}}
+    {{ else }}
+        {{ $paramsCustomCSS = slice $paramsCustomCSS }}
+    {{ end }}
+{{ else }}
+    {{/* Se o parâmetro não existir, usa o caminho padrão definido acima */}}
+    {{ $paramsCustomCSS = slice $customCSSPath }}
+{{ end }}
+
+{{ range $paramsCustomCSS }}
+    {{ $path := . }}
+    {{ $css := resources.Get $path }}
+    {{ if $css }}
+        {{ if eq hugo.Environment "production" }}
+            {{ $css = $css | fingerprint | resources.PostProcess }}
+        {{ end }}
+        <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+        {{ `` | safeHTML }}
+    {{ else }}
+        {{ warnf "ALERTA CSS em extend_head.html: Arquivo custom CSS NÃO encontrado em 'assets/%s' ou 'static/%s'." $path $path }}
+        {{ safeHTML (printf "" $path) }}
+    {{ end }}
+{{ end }}
+
+{{/* Adiciona o CSS do AOS (se você quiser as animações) */}}
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+{{ `` | safeHTML }}
+
