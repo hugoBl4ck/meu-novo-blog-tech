@@ -1,6 +1,14 @@
 {{ define "main" }}
 
 {{- template "_internal/google_analytics.html" . -}}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    {{/* Outras meta tags, links de CSS, etc. */}}
+
+    {{- template "_internal/google_analytics.html" . -}}
+</head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-GSEPCP397S"></script>
 <script>
