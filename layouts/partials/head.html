@@ -47,11 +47,13 @@
 
 {{- /* Link para o CSS principal */}}
 {{- $styles := resources.Get "css/style.css" | postCSS -}}
-{{- if .hugo.IsServer -}}
-<link rel="stylesheet" href="{{ $styles.RelPermalink }}">
-{{- else -}}
+{{- if eq hugo.Environment "production" -}}
+  {{- /* Em produção, aplica fingerprint e PostProcess */ -}}
   {{- $styles = $styles | fingerprint | resources.PostProcess -}}
-<link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}">
+  <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}">
+{{- else -}}
+  {{- /* Em desenvolvimento (hugo server), serve o CSS diretamente */ -}}
+  <link rel="stylesheet" href="{{ $styles.RelPermalink }}">
 {{- end -}}
 
 {{- /* Google Analytics - Chamando o template interno do Hugo */}}
