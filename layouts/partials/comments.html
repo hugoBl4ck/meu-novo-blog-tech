@@ -1,10 +1,43 @@
 {{- /* layouts/partials/comments.html */ -}}
-{{/* Verifica se os comentários estão habilitados globalmente E para este tipo de página E não desabilitados no front matter do post */}}
-{{- /* layouts/partials/comments.html */ -}}
 
-{{/* ----- INÍCIO DAS LINHAS DE DEPURAÇÃO TEMPORÁRIAS ----- */}}
-{{ end }}
-{{ if and .Site.Params.comments (eq .Type .Site.Params.mainSections | or (eq .Type "posts") | or (eq .Type "blog")) (ne .Params.comments false) }}
+{{/* ----- Bloco de Variáveis para Depuração e Condicional ----- */}}
+{{ $showComments := false }}
+{{ $debugOutput := slice }}
+
+{{ $globalCommentsEnabled := .Site.Params.comments }}
+{{ $pageType := .Type }}
+{{ $mainSections := .Site.Params.mainSections }}
+{{ $pageCommentsParam := .Params.comments }}
+
+{{ $pageCommentsNotDisabled := ne $pageCommentsParam false }}
+
+{{ $isTypePosts := eq $pageType "posts" }}
+{{ $isTypeBlog := eq $pageType "blog" }}
+{{ $isInMainSections := false }}
+{{ if $mainSections }}{{ $isInMainSections = in $mainSections $pageType }}{{ end }}
+{{ $typeConditionMet := or $isInMainSections $isTypePosts $isTypeBlog }}
+
+{{ $finalCondition := and $globalCommentsEnabled $typeConditionMet $pageCommentsNotDisabled }}
+{{ $showComments = $finalCondition }}
+
+{{ $debugOutput = $debugOutput | append (printf "Site.Params.comments (Global): [%v]" $globalCommentsEnabled) }}
+{{ $debugOutput = $debugOutput | append (printf "Page.Type (Tipo da página atual): [%s]" $pageType) }}
+{{ $debugOutput = $debugOutput | append (printf "Site.Params.mainSections: [%s]" (delimit .Site.Params.mainSections ",")) }}
+{{ $debugOutput = $debugOutput | append (printf "Page.Params.comments (Front matter): [%v]" $pageCommentsParam) }}
+{{ $debugOutput = $debugOutput | append (printf "Condição (Page.Params.comments NÃO é false): [%v]" $pageCommentsNotDisabled) }}
+{{ $debugOutput = $debugOutput | append (printf "Condição (Page.Type é 'posts'): [%v]" $isTypePosts) }}
+{{ $debugOutput = $debugOutput | append (printf "Condição (Page.Type é 'blog'): [%v]" $isTypeBlog) }}
+{{ $debugOutput = $debugOutput | append (printf "Condição (Page.Type está em Site.Params.mainSections): [%v]" $isInMainSections) }}
+{{ $debugOutput = $debugOutput | append (printf "Condição de Tipo Combinada (mainSections OU 'posts' OU 'blog') é: [%v]" $typeConditionMet) }}
+{{ $debugOutput = $debugOutput | append (printf "RESULTADO FINAL DA CONDICIONAL 'and' SERÁ: [%v]" $finalCondition) }}
+{{/* ----- Fim do Bloco de Variáveis ----- */}}
+
+{{/* ----- INÍCIO DAS LINHAS DE DEPURAÇÃO TEMPORÁRIAS (VISÍVEIS NO HTML GERADO) ----- */}}
+{{/* ----- FIM DAS LINHAS DE DEPURAÇÃO TEMPORÁRIAS ----- */}}
+
+
+{{/* Condicional Principal usa a variável $showComments definida acima */}}
+{{ if $showComments }}
     {{ if .Site.Params.giscus.repo }}
         <div class="comments giscus" style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
             <h3>{{ .Site.Params.giscus.title | default "Comentários" }}</h3>
@@ -24,7 +57,6 @@
                     crossorigin="anonymous"
                     async>
             </script>
-            {{/* Adicione um link para as discussões se o usuário quiser abrir no GitHub */}}
             <noscript>Por favor, habilite o JavaScript para ver os <a href="https://giscus.app">comentários do Giscus.</a></noscript>
             <p style="font-size: 0.9rem; margin-top: 1rem;">
                 <a href="https://github.com/{{ .Site.Params.giscus.repo }}/discussions" target="_blank" rel="noopener noreferrer">
@@ -35,4 +67,5 @@
     {{ else }}
         <p>A configuração de comentários (Giscus) está ausente no arquivo de configuração do site (hugo.toml).</p>
     {{ end }}
-{{ end }}
+{{ else }}
+    {{ end }}
