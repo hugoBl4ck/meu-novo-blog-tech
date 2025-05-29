@@ -238,7 +238,7 @@ enableInlineShortcodes = true # Permite shortcodes dentro de parágrafos
   [privacy.disqus]
     disable = true # Desabilitar Disqus se estiver usando Giscus
   [privacy.googleAnalytics]
-    # anonymizeIP = true
+    # anonymizeIP = false
     disable = true # Desabilitar se não usar GA
     # respectDoNotTrack = false
     # useSessionStorage = false
