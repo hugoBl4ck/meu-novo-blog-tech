@@ -1,0 +1,16 @@
+/* assets/css/matrix-style.css */
+
+
+#matrixCanvas {
+    display: block; /* Garante que ele se comporte como um bloco */
+    width: 100%;    /* Fará o canvas ocupar 100% da largura do seu container pai */
+    height: auto;   /* A altura será definida pelo JavaScript ou pelo aspect-ratio */
+    /* Você pode querer definir um aspect-ratio para manter as proporções
+       da imagem original, ou definir uma altura fixa se preferir.
+       A imagem original hacktoberfest_hu_85d5466617b07d85.webp tinha dimensões
+       intrínsecas de 2748x2000. Você pode usar isso para calcular um aspect-ratio.
+       Exemplo: aspect-ratio: 2748 / 2000;
+    */
+    background-color: #000; /* Fundo preto para o próprio canvas do Matrix */
+    /* Adicione outras estilizações se necessário, como bordas, etc. */
+}
