@@ -1,34 +1,34 @@
-{{- /* layouts/partials/comments.html - VERSÃO SUPER SIMPLIFICADA */ -}}
+{{- /* layouts/partials/comments.html - Versão Limpa e Simplificada */ -}}
 
-{{- if and .Site.Params.comments (ne .Params.comments false) -}}
-    {{- /* Verifica se a configuração básica do Giscus (repo) existe */ -}}
-    {{- if .Site.Params.giscus.repo -}}
-        <div class="comments giscus" style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
-            <h3>{{ .Site.Params.giscus.title | default "Comentários" }}</h3>
-            <script src="https://giscus.app/client.js"
-                    data-repo="{{ .Site.Params.giscus.repo }}"
-                    data-repo-id="{{ .Site.Params.giscus.repoId }}"
-                    data-category="{{ .Site.Params.giscus.category }}"
-                    data-category-id="{{ .Site.Params.giscus.categoryId }}"
-                    data-mapping="{{ .Site.Params.giscus.mapping | default "pathname" }}"
-                    data-strict="{{ .Site.Params.giscus.strict | default "0" }}"
-                    data-reactions-enabled="{{ .Site.Params.giscus.reactionsEnabled | default "1" }}"
-                    data-emit-metadata="{{ .Site.Params.giscus.emitMetadata | default "0" }}"
-                    data-input-position="{{ .Site.Params.giscus.inputPosition | default "bottom" }}"
-                    data-theme="{{ .Site.Params.giscus.theme | default "preferred_color_scheme" }}"
-                    data-lang="{{ .Site.Params.giscus.lang | default "pt" }}"
-                    data-loading="{{ .Site.Params.giscus.loading | default "lazy" }}"
-                    crossorigin="anonymous"
-                    async>
-            </script>
-            <noscript>Por favor, habilite o JavaScript para ver os <a href="https://giscus.app">comentários do Giscus.</a></noscript>
-            <p style="font-size: 0.9rem; margin-top: 1rem;">
-                <a href="https://github.com/{{ .Site.Params.giscus.repo }}/discussions" target="_blank" rel="noopener noreferrer">
-                    Ver discussões no GitHub
-                </a>
-            </p>
-        </div>
-    {{- else -}}
-        {{- end -}}
+{{- /* Verifica se a configuração básica do Giscus (repo) existe no hugo.toml */ -}}
+{{- if .Site.Params.giscus.repo -}}
+    <div class="comments giscus" style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
+        <h3>{{ .Site.Params.giscus.title | default "Comentários" }}</h3>
+        <script src="https://giscus.app/client.js"
+                data-repo="{{ .Site.Params.giscus.repo }}"
+                data-repo-id="{{ .Site.Params.giscus.repoId }}"
+                data-category="{{ .Site.Params.giscus.category }}"
+                data-category-id="{{ .Site.Params.giscus.categoryId }}"
+                data-mapping="{{ .Site.Params.giscus.mapping | default "pathname" }}"
+                data-strict="{{ .Site.Params.giscus.strict | default "0" }}"
+                data-reactions-enabled="{{ .Site.Params.giscus.reactionsEnabled | default "1" }}"
+                data-emit-metadata="{{ .Site.Params.giscus.emitMetadata | default "0" }}"
+                data-input-position="{{ .Site.Params.giscus.inputPosition | default "bottom" }}"
+                data-theme="{{ .Site.Params.giscus.theme | default "preferred_color_scheme" }}"
+                data-lang="{{ .Site.Params.giscus.lang | default "pt" }}"
+                data-loading="{{ .Site.Params.giscus.loading | default "lazy" }}"
+                crossorigin="anonymous"
+                async>
+        </script>
+        <noscript>Por favor, habilite o JavaScript para ver os <a href="https://giscus.app">comentários do Giscus.</a></noscript>
+        <p style="font-size: 0.9rem; margin-top: 1rem;">
+            <a href="https://github.com/{{ .Site.Params.giscus.repo }}/discussions" target="_blank" rel="noopener noreferrer">
+                Ver discussões no GitHub
+            </a>
+        </p>
+    </div>
 {{- else -}}
+    {{- /* Mensagem para o autor do site se giscus.repo não estiver configurado.
+         Isso só aparecerá no código-fonte HTML, não visível para os visitantes normais.
+    */}}
     {{- end -}}
