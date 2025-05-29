@@ -125,7 +125,7 @@ enableInlineShortcodes = true # Permite shortcodes dentro de parágrafos
   # Adapte estas seções com SEU conteúdo. Remova as que não quiser.
   # As imagens são relativas à pasta static/. Ex: "images/home/missao.jpg" -> static/images/home/missao.jpg
   
-  [params.hero.image]
+  [params.hero]
     image = "images/home/logo.jpg"  # <<== CAMINHO PARA SUA NOVA IMAGEM (relativo a 'assets/' ou 'static/')
     alt = "Descrição da minha imagem hero principal"   # <<== TEXTO ALTERNATIVO PARA SUA IMAGEM
   [params.p1] # Exemplo: Seção "Nossa Missão" ou "Sobre o Blog"
