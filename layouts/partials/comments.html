@@ -1,24 +1,7 @@
-{{- /* layouts/partials/comments.html - Versão Final Funcional */ -}}
+{{- /* layouts/partials/comments.html - VERSÃO SUPER SIMPLIFICADA */ -}}
 
-{{- $showCommentsForPage := false -}}{{/* Inicializa a variável de controle */}}
-
-{{- /* Verifica se o tipo da página atual está entre os tipos onde os comentários são permitidos */}}
-{{- $isAllowedType := false -}}
-{{- if .Site.Params.mainSections -}}
-  {{- if in .Site.Params.mainSections .Type -}}
-    {{- $isAllowedType = true -}}
-  {{- end -}}
-{{- end -}}
-{{- $isAllowedType = or $isAllowedType (eq .Type "posts") (eq .Type "blog") -}}
-
-{{- /* Condição final para mostrar comentários */}}
-{{- if and .Site.Params.comments $isAllowedType (ne .Params.comments false) -}}
-  {{- $showCommentsForPage = true -}}
-{{- end -}}
-
-
-{{- if $showCommentsForPage -}}
-    {{- /* Verifica se a configuração do repositório Giscus existe no hugo.toml */}}
+{{- if and .Site.Params.comments (ne .Params.comments false) -}}
+    {{- /* Verifica se a configuração básica do Giscus (repo) existe */ -}}
     {{- if .Site.Params.giscus.repo -}}
         <div class="comments giscus" style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
             <h3>{{ .Site.Params.giscus.title | default "Comentários" }}</h3>
@@ -46,12 +29,6 @@
             </p>
         </div>
     {{- else -}}
-        {{- /* Mensagem para o autor do site se giscus.repo não estiver configurado */}}
-        <p style="color: orange; font-style: italic;">Configuração de comentários (Giscus repo) ausente.</p>
-    {{- end -}}
+        {{- end -}}
 {{- else -}}
-    {{- /* Comentário HTML opcional para indicar que os comentários foram intencionalmente omitidos por esta página
-         Isso não aparecerá para os visitantes, apenas no código-fonte.
-         Pode ser útil para você no futuro se perguntar por que os comentários não estão em uma página específica.
-    */}}
     {{- end -}}
