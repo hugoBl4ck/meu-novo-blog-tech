@@ -11,6 +11,11 @@ enableRobotsTXT = true
 canonifyURLs = false       # Em produção, Netlify geralmente lida bem com isso. Pode mudar para true se necessário.
 pagerSize = 9             # Número de posts por página (o exemplo do TailBliss usa 6 ou 9)
 
+# Google Analytics
+[services]
+  [services.googleAnalytics]
+    id = "G-GSEPCP397S"
+
 # O tema TailBliss especifica um arquivo JS para modo escuro em seus assets
 # Se você não for modificar este JS do tema, esta linha pode não ser necessária aqui,
 # pois o tema o carregará de seus próprios assets.

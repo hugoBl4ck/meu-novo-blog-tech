@@ -1,4 +1,5 @@
 {{ define "main" }}
+{{- template "_internal/google_analytics.html" . -}}
 
 {{/* --- BLOCO PARA CSS CUSTOMIZADO E AOS CSS --- */}}
 {{ $customCSS := resources.Get "css/custom.css" }} {{/* Hugo procurará em assets/css/custom.css primeiro */}}
