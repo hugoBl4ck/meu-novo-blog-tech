@@ -111,7 +111,7 @@ enableInlineShortcodes = true # Permite shortcodes dentro de parágrafos
   # authorimage = "/images/seu-avatar.webp" # Caminho para sua imagem de autor em static/images/
   og_image = "images/home/logo.jpg" # <<== CRIE UMA IMAGEM DE PRÉVIA (ex: 1200x630px) em static/images/
   moto = "Explorando LLMs, Cibersegurança e Tecnologia" # Seu slogan ou subtítulo
-  description = "Um blog dedicado a desvendar o mundo da Inteligência Artificial local, segurança da informação, CVEs e as últimas novidades em tecnologia." # <<== SUA DESCRIÇÃO
+  description = "Quero testar pra saber se essa inscrição entra no head" # <<== SUA DESCRIÇÃO
   googleSiteVerification = "Q-ixydznK_Ce9J_KG0QxKcIX_IGKA-dmFhCH888yYQc"
   disable_theme_toggle = false # Permite o botão de alternar tema claro/escuro
   disable_stay_uptodate = true # true para esconder a seção de "Stay up to date" (newsletter) do tema, se não for usar
