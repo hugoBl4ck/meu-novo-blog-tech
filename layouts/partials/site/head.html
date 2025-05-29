@@ -2,7 +2,9 @@
 
 {{- template "_internal/google_analytics.html" . -}}
 <meta name="google-site-verification" content="Q-ixydznK_Ce9J_KG0QxKcIX_IGKA-dmFhCH888yYQc" />
-
+{{- with .Site.Params.googleSiteVerification }}
+  <meta name="google-site-verification" content="{{ . }}" />
+{{- end }}
 
 
 {{/* --- BLOCO PARA CSS CUSTOMIZADO E AOS CSS --- */}}
