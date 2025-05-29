@@ -1,4 +1,4 @@
-<!-- Estou usando o head no caminho: /site -->
+
 {{- /* layouts/partials/site/head.html */ -}}
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -56,7 +56,12 @@
   <link rel="stylesheet" href="{{ $styles.RelPermalink }}">
 {{- end -}}
 
-{{- /* Google Analytics - Chamando o template interno do Hugo */}}
-{{- if eq hugo.Environment "production" -}}
-  {{- template "_internal/google_analytics.html" . -}}
-{{- end -}}
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GSEPCP397S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GSEPCP397S');
+</script>
