@@ -1,46 +1,17 @@
-{{- /* layouts/partials/comments.html */ -}}
+{{- /* layouts/partials/comments.html - VERSÃO SIMPLIFICADA PARA DEPURAÇÃO */ -}}
 
-{{/* ----- Bloco de Variáveis para Depuração e Condicional ----- */}}
-{{ $showComments := false }}
-{{ $debugOutput := slice }}
+<div style="border: 3px dashed green; padding: 15px; margin-top: 25px; background-color: #f0fff0;">
+    <h2 style="color: green; margin-top: 0;">DEBUG: Seção de Comentários (Partial 'comments.html')</h2>
+    <p style="font-weight: bold;">Se você está vendo esta caixa verde, o arquivo 'layouts/partials/comments.html' foi incluído com sucesso!</p>
 
-{{ $globalCommentsEnabled := .Site.Params.comments }}
-{{ $pageType := .Type }}
-{{ $mainSections := .Site.Params.mainSections }}
-{{ $pageCommentsParam := .Params.comments }}
-
-{{ $pageCommentsNotDisabled := ne $pageCommentsParam false }}
-
-{{ $isTypePosts := eq $pageType "posts" }}
-{{ $isTypeBlog := eq $pageType "blog" }}
-{{ $isInMainSections := false }}
-{{ if $mainSections }}{{ $isInMainSections = in $mainSections $pageType }}{{ end }}
-{{ $typeConditionMet := or $isInMainSections $isTypePosts $isTypeBlog }}
-
-{{ $finalCondition := and $globalCommentsEnabled $typeConditionMet $pageCommentsNotDisabled }}
-{{ $showComments = $finalCondition }}
-
-{{ $debugOutput = $debugOutput | append (printf "Site.Params.comments (Global): [%v]" $globalCommentsEnabled) }}
-{{ $debugOutput = $debugOutput | append (printf "Page.Type (Tipo da página atual): [%s]" $pageType) }}
-{{ $debugOutput = $debugOutput | append (printf "Site.Params.mainSections: [%s]" (delimit .Site.Params.mainSections ",")) }}
-{{ $debugOutput = $debugOutput | append (printf "Page.Params.comments (Front matter): [%v]" $pageCommentsParam) }}
-{{ $debugOutput = $debugOutput | append (printf "Condição (Page.Params.comments NÃO é false): [%v]" $pageCommentsNotDisabled) }}
-{{ $debugOutput = $debugOutput | append (printf "Condição (Page.Type é 'posts'): [%v]" $isTypePosts) }}
-{{ $debugOutput = $debugOutput | append (printf "Condição (Page.Type é 'blog'): [%v]" $isTypeBlog) }}
-{{ $debugOutput = $debugOutput | append (printf "Condição (Page.Type está em Site.Params.mainSections): [%v]" $isInMainSections) }}
-{{ $debugOutput = $debugOutput | append (printf "Condição de Tipo Combinada (mainSections OU 'posts' OU 'blog') é: [%v]" $typeConditionMet) }}
-{{ $debugOutput = $debugOutput | append (printf "RESULTADO FINAL DA CONDICIONAL 'and' SERÁ: [%v]" $finalCondition) }}
-{{/* ----- Fim do Bloco de Variáveis ----- */}}
-
-{{/* ----- INÍCIO DAS LINHAS DE DEPURAÇÃO TEMPORÁRIAS (VISÍVEIS NO HTML GERADO) ----- */}}
-{{/* ----- FIM DAS LINHAS DE DEPURAÇÃO TEMPORÁRIAS ----- */}}
-
-
-{{/* Condicional Principal usa a variável $showComments definida acima */}}
-{{ if $showComments }}
+    {{/* A única condicional que manteremos é verificar se a configuração básica do Giscus existe */}}
     {{ if .Site.Params.giscus.repo }}
-        <div class="comments giscus" style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
-            <h3>{{ .Site.Params.giscus.title | default "Comentários" }}</h3>
+        <p style="color: green;">DEBUG: Configuração 'giscus.repo' encontrada no hugo.toml (Valor: {{ .Site.Params.giscus.repo }}). Tentando carregar Giscus...</p>
+        
+        <div class="comments giscus" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed #ccc;">
+            {{/* Usando o título do seu hugo.toml ou um padrão */}}
+            <h3>{{ .Site.Params.giscus.title | default "Comentários Giscus" }}</h3>
+            
             <script src="https://giscus.app/client.js"
                     data-repo="{{ .Site.Params.giscus.repo }}"
                     data-repo-id="{{ .Site.Params.giscus.repoId }}"
@@ -65,7 +36,7 @@
             </p>
         </div>
     {{ else }}
-        <p>A configuração de comentários (Giscus) está ausente no arquivo de configuração do site (hugo.toml).</p>
+        <p style="color: red; font-weight: bold;">DEBUG: A configuração 'giscus.repo' NÃO foi encontrada em [params.giscus] no seu hugo.toml. O Giscus não pode ser carregado.</p>
     {{ end }}
-{{ else }}
-    {{ end }}
+    <p style="font-weight: bold; color: green; margin-top: 15px;">FIM DA SEÇÃO DE DEBUG 'comments.html'.</p>
+</div>
