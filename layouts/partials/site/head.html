@@ -1,23 +1,8 @@
 {{ define "main" }}
 
 {{- template "_internal/google_analytics.html" . -}}
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    {{/* Outras meta tags, links de CSS, etc. */}}
 
-    {{- template "_internal/google_analytics.html" . -}}
-</head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-GSEPCP397S"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-GSEPCP397S');
-</script>
 
 {{/* --- BLOCO PARA CSS CUSTOMIZADO E AOS CSS --- */}}
 {{ $customCSS := resources.Get "css/custom.css" }} {{/* Hugo procurará em assets/css/custom.css primeiro */}}
