@@ -1,5 +1,9 @@
 {{- /* layouts/partials/comments.html */ -}}
 {{/* Verifica se os comentários estão habilitados globalmente E para este tipo de página E não desabilitados no front matter do post */}}
+{{- /* layouts/partials/comments.html */ -}}
+
+{{/* ----- INÍCIO DAS LINHAS DE DEPURAÇÃO TEMPORÁRIAS ----- */}}
+{{ end }}
 {{ if and .Site.Params.comments (eq .Type .Site.Params.mainSections | or (eq .Type "posts") | or (eq .Type "blog")) (ne .Params.comments false) }}
     {{ if .Site.Params.giscus.repo }}
         <div class="comments giscus" style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
