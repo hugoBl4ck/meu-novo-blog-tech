@@ -1,7 +1,7 @@
 # -----------------------------------------------------------------------------
 # Configurações Base do Site
 # -----------------------------------------------------------------------------
-baseURL = "/" # Mantenha "/" por enquanto. Você atualizará para sua URL do Netlify depois do primeiro deploy bem-sucedido.
+baseURL = "https://elaborate-scone-2651ee.netlify.app/" # Mantenha "/" por enquanto. Você atualizará para sua URL do Netlify depois do primeiro deploy bem-sucedido.
 languageCode = "pt-br"
 title = "Blog do Hugo Robot" # SEU TÍTULO PRINCIPAL
 DefaultContentLanguage = "pt" # Define português como padrão
@@ -104,7 +104,7 @@ enableInlineShortcodes = true # Permite shortcodes dentro de parágrafos
 [params]
   author = "Hugo Robot" # <<== SEU NOME DE AUTOR
   # authorimage = "/images/seu-avatar.webp" # Caminho para sua imagem de autor em static/images/
-  og_image = "/images/blog-preview.jpg" # <<== CRIE UMA IMAGEM DE PRÉVIA (ex: 1200x630px) em static/images/
+  og_image = "images/home/logo.jpg" # <<== CRIE UMA IMAGEM DE PRÉVIA (ex: 1200x630px) em static/images/
   moto = "Explorando LLMs, Cibersegurança e Tecnologia" # Seu slogan ou subtítulo
   description = "Um blog dedicado a desvendar o mundo da Inteligência Artificial local, segurança da informação, CVEs e as últimas novidades em tecnologia." # <<== SUA DESCRIÇÃO
   
@@ -125,9 +125,12 @@ enableInlineShortcodes = true # Permite shortcodes dentro de parágrafos
   # Adapte estas seções com SEU conteúdo. Remova as que não quiser.
   # As imagens são relativas à pasta static/. Ex: "images/home/missao.jpg" -> static/images/home/missao.jpg
   
+  [params.hero.image]
+    image = "images/home/logo.jpg"  # <<== CAMINHO PARA SUA NOVA IMAGEM (relativo a 'assets/' ou 'static/')
+    alt = "Descrição da minha imagem hero principal"   # <<== TEXTO ALTERNATIVO PARA SUA IMAGEM
   [params.p1] # Exemplo: Seção "Nossa Missão" ou "Sobre o Blog"
     heading = "Explorando a Fronteira Digital"
-    image = "/images/home/intro-image.jpg" # <<== CRIE ESTA IMAGEM
+    image = "images/home/blog-preview.jpg" # <<== CRIE ESTA IMAGEM
     altText = "Imagem representando tecnologia e exploração"
     content = [
       { text = "Bem-vindo ao meu laboratório de ideias! Aqui compartilho minhas explorações no universo da Inteligência Artificial Local, os desafios da Cibersegurança e as últimas descobertas sobre Vulnerabilidades e CVEs." },
