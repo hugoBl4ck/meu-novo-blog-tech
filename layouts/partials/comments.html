@@ -1,17 +1,27 @@
-{{- /* layouts/partials/comments.html - VERSÃO SIMPLIFICADA PARA DEPURAÇÃO */ -}}
+{{- /* layouts/partials/comments.html - Versão Final Funcional */ -}}
 
-<div style="border: 3px dashed green; padding: 15px; margin-top: 25px; background-color: #f0fff0;">
-    <h2 style="color: green; margin-top: 0;">DEBUG: Seção de Comentários (Partial 'comments.html')</h2>
-    <p style="font-weight: bold;">Se você está vendo esta caixa verde, o arquivo 'layouts/partials/comments.html' foi incluído com sucesso!</p>
+{{- $showCommentsForPage := false -}}{{/* Inicializa a variável de controle */}}
 
-    {{/* A única condicional que manteremos é verificar se a configuração básica do Giscus existe */}}
-    {{ if .Site.Params.giscus.repo }}
-        <p style="color: green;">DEBUG: Configuração 'giscus.repo' encontrada no hugo.toml (Valor: {{ .Site.Params.giscus.repo }}). Tentando carregar Giscus...</p>
-        
-        <div class="comments giscus" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed #ccc;">
-            {{/* Usando o título do seu hugo.toml ou um padrão */}}
-            <h3>{{ .Site.Params.giscus.title | default "Comentários Giscus" }}</h3>
-            
+{{- /* Verifica se o tipo da página atual está entre os tipos onde os comentários são permitidos */}}
+{{- $isAllowedType := false -}}
+{{- if .Site.Params.mainSections -}}
+  {{- if in .Site.Params.mainSections .Type -}}
+    {{- $isAllowedType = true -}}
+  {{- end -}}
+{{- end -}}
+{{- $isAllowedType = or $isAllowedType (eq .Type "posts") (eq .Type "blog") -}}
+
+{{- /* Condição final para mostrar comentários */}}
+{{- if and .Site.Params.comments $isAllowedType (ne .Params.comments false) -}}
+  {{- $showCommentsForPage = true -}}
+{{- end -}}
+
+
+{{- if $showCommentsForPage -}}
+    {{- /* Verifica se a configuração do repositório Giscus existe no hugo.toml */}}
+    {{- if .Site.Params.giscus.repo -}}
+        <div class="comments giscus" style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
+            <h3>{{ .Site.Params.giscus.title | default "Comentários" }}</h3>
             <script src="https://giscus.app/client.js"
                     data-repo="{{ .Site.Params.giscus.repo }}"
                     data-repo-id="{{ .Site.Params.giscus.repoId }}"
@@ -35,8 +45,13 @@
                 </a>
             </p>
         </div>
-    {{ else }}
-        <p style="color: red; font-weight: bold;">DEBUG: A configuração 'giscus.repo' NÃO foi encontrada em [params.giscus] no seu hugo.toml. O Giscus não pode ser carregado.</p>
-    {{ end }}
-    <p style="font-weight: bold; color: green; margin-top: 15px;">FIM DA SEÇÃO DE DEBUG 'comments.html'.</p>
-</div>
+    {{- else -}}
+        {{- /* Mensagem para o autor do site se giscus.repo não estiver configurado */}}
+        <p style="color: orange; font-style: italic;">Configuração de comentários (Giscus repo) ausente.</p>
+    {{- end -}}
+{{- else -}}
+    {{- /* Comentário HTML opcional para indicar que os comentários foram intencionalmente omitidos por esta página
+         Isso não aparecerá para os visitantes, apenas no código-fonte.
+         Pode ser útil para você no futuro se perguntar por que os comentários não estão em uma página específica.
+    */}}
+    {{- end -}}
