@@ -46,11 +46,11 @@ module.exports = {
             // Tamanhos de fonte personalizados
             fontSize: '1rem',
             h1: {
-              fontSize: '2rem',
+              fontSize: '2.5rem',
               lineHeight: theme('lineHeight.tight'),
             },
             h2: {
-              fontSize: '1.5rem',
+              fontSize: '2rem',
               lineHeight: theme('lineHeight.tight'),
             },
             h3: {
@@ -58,7 +58,7 @@ module.exports = {
               lineHeight: theme('lineHeight.snug'),
             },
             p: {
-              fontSize: '0.95rem',
+              fontSize: '0.875rem',
               lineHeight: theme('lineHeight.relaxed'),
             },
             li: {
