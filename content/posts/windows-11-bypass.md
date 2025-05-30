@@ -10,7 +10,7 @@ draft: false # Mude para true se quiser trabalhar nele antes de publicar
 tags: ["Windows 11", "Conta Microsoft", "Conta Local", "Instalação Windows", "BypassNRO", "ITSupport", "System Administration", "Dicas de TI"]
 categories: ["Windows", "Tutoriais"]
 ---
-
+## Windows 11: Novo Método para Instalação com Conta Local (Poss-BypassNRO)
 A Microsoft recentemente removeu o conhecido script `BypassNRO.cmd` das compilações de pré-visualização do Windows 11. Esse script era uma ferramenta útil que permitia aos usuários e profissionais de TI contornar o requisito obrigatório de uma Conta Microsoft (MSA) durante a instalação do sistema operacional, possibilitando a criação direta de uma conta local.
 
 Com essa mudança, muitos podem estar se perguntando qual a alternativa. Felizmente, existe um novo método que ainda permite essa flexibilidade.
@@ -40,6 +40,8 @@ Se você está instalando uma versão mais recente do Windows 11 e quer configur
     iniciar ms-cxh:localonly
     ```
     *(Este comando visa abrir diretamente a interface de criação de conta local. Sua eficácia pode variar dependendo da build específica do Windows 11.)*
+    
+    <img src="/images/post/windows11-bypass.jpg" alt="windows11-bypass" style="max-width: 80%; height: auto; display: block; margin: 0 auto;">
 
     **Errata Importante (Correção Baseada na Sua Descrição Original):**
     Sua descrição original sugere que o comando `iniciar ms-cxh:localonly` é o novo método principal após o `BypassNRO.cmd` ser removido. Se o `oobe\bypassnro` não estiver mais disponível ou não for o caminho, o foco deve ser no `iniciar ms-cxh:localonly`.
