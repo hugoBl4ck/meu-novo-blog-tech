@@ -4,7 +4,7 @@ date: 2025-05-30T19:20:00-03:00 # << MUDE PARA A DATA E HORA ATUAIS OU DE PUBLIC
 description: "Aprenda o novo método para contornar a exigência de conta Microsoft e criar uma conta local durante a instalação do Windows 11, após a remoção do script BypassNRO.cmd."
 keywords: ["Windows 11", "Conta Microsoft", "Conta Local", "Instalação Windows", "BypassNRO", "ITSupport", "System Administration", "Dicas de TI"]
 author: "Hugo Robot" # << SEU NOME DE AUTOR
-images: ["images/posts/windows11-bypass.jpg"] 
+images: ["images/post/windows11-bypass.jpg"] 
 draft: false # Mude para true se quiser trabalhar nele antes de publicar
 
 tags: ["Windows 11", "Conta Microsoft", "Conta Local", "Instalação Windows", "BypassNRO", "ITSupport", "System Administration", "Dicas de TI"]
