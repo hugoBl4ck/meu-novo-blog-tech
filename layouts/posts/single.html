@@ -16,59 +16,55 @@
 
 <article class="py-8">
     {{/* --- SEÇÃO DA IMAGEM DE DESTAQUE (BANNER) --- */}}
+    {{/* Primeiro, verificamos se .Params.images existe e tem algum valor */}}
     {{ with .Params.images }}
-        {{ range first 1 . }} {{/* Pega a primeira imagem da lista */}}
-            {{ $imagePath := . }}
+        {{/* Se existir, pegamos o primeiro item da lista (que é o caminho da imagem) */}}
+        {{ range first 1 . }} 
+            {{ $imagePath := . }} {{/* Agora $imagePath está definida com o caminho do front matter */}}
             {{ $imageResource := "" }}
             {{ $isStaticImage := false }}
 
-            {{/* Tenta primeiro como um recurso de assets (global ou da página) */}}
-            {{ if strings.HasPrefix . "/" }}
-                {{ $assetPath := strings.TrimPrefix "/" . }}
-                {{ if resources.Get $assetPath }}
-                    {{ $imageResource = resources.Get $assetPath }}
-                {{ else if fileExists (printf "static/%s" $assetPath) }}
-                    {{ $isStaticImage = true }}
-                {{ end }}
-            {{ else }}
-                {{ $imageResource = $.Resources.GetMatch . }}
+            {{/* Lógica para encontrar a imagem (em assets, Page Resources ou static) */}}
+            {{ $resource := resources.Get $imagePath }}
+            {{ if $resource }}
+                {{ $imageResource = $resource }}
+            {{ else if $.Page.Resources.GetMatch $imagePath }}
+                {{ $imageResource = $.Page.Resources.GetMatch $imagePath }}
+            {{ else if fileExists (printf "static/%s" $imagePath) }}
+                {{ $isStaticImage = true }}
             {{ end }}
 
-            {{/* Container para a imagem de destaque. 
-                 Ajuste max-w-4xl para a largura desejada do banner (ex: max-w-full para largura total do container do artigo, 
-                 ou max-w-2xl/3xl se quiser que seja mais estreito que o texto principal, mas geralmente para banner é mais largo).
-            */}}
-            <div class="max-w-4xl mx-auto mb-6 px-4"> 
+            {{/* Container para a imagem de destaque */}}
+            <div class="max-w-4xl mx-auto mb-6 px-4">
                 {{ if $imageResource }}
-                    {{/* Redimensiona a imagem para uma largura grande, a altura será controlada pelo CSS da tag <img> */}}
-                    {{/* Ex: Largura de 1200px. A altura real da imagem redimensionada manterá a proporção. */}}
-                    {{ $processedImage := $imageResource.Resize "1200x" }} 
-                    <img src="{{ $processedImage.RelPermalink }}" 
-                         width="{{ $processedImage.Width }}" 
-                         height="{{ $processedImage.Height }}" 
-                         alt="{{ $.Title }} - Imagem de Destaque" 
-                         class="w-full rounded-lg shadow-lg" 
+                    {{/* Imagem de assets ou Page Resource: Processa */}}
+                    {{ $processedImage := $imageResource.Resize "1200x" }} {{/* Ajuste "1200x" para a largura desejada */}}
+                    <img src="{{ $processedImage.RelPermalink }}"
+                         width="{{ $processedImage.Width }}"
+                         height="{{ $processedImage.Height }}"
+                         alt="{{ $.Title }} - Imagem de Destaque"
+                         class="w-full rounded-lg shadow-lg"
                          style="height: 200px; object-fit: cover; object-position: center center;">
-                         {{/* ALTURA DO BANNER: ajuste 'height: 200px;' para a altura desejada (ex: 150px, 250px) */}}
-                         {{/* OBJECT-POSITION: ajuste 'center center' para 'center top', 'center bottom', etc., para focar na parte certa da imagem */}}
+                         {{/* AJUSTE A ALTURA: mude 'height: 200px;' conforme necessário */}}
+                         {{/* AJUSTE O FOCO: mude 'object-position: center center;' se precisar */}}
                 {{ else if $isStaticImage }}
-                    <img src="{{ $imagePath | relURL }}" 
-                         alt="{{ $.Title }} - Imagem de Destaque" 
-                         class="w-full rounded-lg shadow-lg" 
+                    {{/* Imagem de static: Usa diretamente */}}
+                    <img src="{{ $imagePath | relURL }}"
+                         alt="{{ $.Title }} - Imagem de Destaque"
+                         class="w-full rounded-lg shadow-lg"
                          style="height: 200px; object-fit: cover; object-position: center center;">
-                         {{/* ALTURA DO BANNER: ajuste 'height: 200px;' */}}
-                         {{/* OBJECT-POSITION: ajuste 'center center' */}}
+                         {{/* AJUSTE A ALTURA E O FOCO aqui também */}}
                 {{ else }}
                     {{ warnf "Imagem de destaque '%s' definida em .Params.images não encontrada." $imagePath }}
                 {{ end }}
             </div>
-        {{ end }}
-    {{ end }}
+        {{ end }} {{/* Fim do 'range first 1 .' */}}
+    {{ end }} {{/* Fim do 'with .Params.images' */}}
     {{/* --- FIM DA SEÇÃO DA IMAGEM DE DESTAQUE --- */}}
 
 
     <header class="mb-8">
-        <div class="container mx-auto px-4 text-center">
+        <div class="container mx-auto px-4 text-center"> 
             
             <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight text-gray-900 dark:text-white mb-4">
                 {{ .Title }}
