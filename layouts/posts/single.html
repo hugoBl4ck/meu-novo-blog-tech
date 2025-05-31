@@ -18,7 +18,24 @@
   <header class="mb-4 bg-primary-600">
   </header>
   <div class="max-w-4xl mx-auto mt-8 mb-2">
-    {{/* ... imagem de destaque ... */}}
+    {{ with .Params.images }}
+    {{ range first 1 . }} {{/* Pega a primeira imagem da lista */}}
+        {{ $imagePath := . }}
+        {{/* Verifica se a imagem existe em static (forma mais simples) */}}
+        {{ if fileExists (printf "static/%s" $imagePath) }}
+            <img src="{{ $imagePath | relURL }}" alt="{{ $.Title }} - Imagem de Destaque" class="mx-auto my-4 rounded-lg shadow-lg">
+        {{ else }}
+            {{/* Ou tenta carregar de assets se você quiser processar a imagem */}}
+            {{ $imageResource := resources.Get $imagePath }}
+            {{ if $imageResource }}
+                {{ $processedImage := $imageResource.Fill "768x400 smart" }} {{/* Exemplo de processamento */}}
+                <img src="{{ $processedImage.RelPermalink }}" width="{{ $processedImage.Width }}" height="{{ $processedImage.Height }}" alt="{{ $.Title }} - Imagem de Destaque" class="mx-auto my-4 rounded-lg shadow-lg">
+            {{ else }}
+                {{ warnf "Imagem de destaque '%s' definida no front matter não encontrada em static/ ou assets/" $imagePath }}
+            {{ end }}
+        {{ end }}
+    {{ end }}
+{{ end }}
   </div>
   <div class="max-w-2xl px-6 pt-6 pb-16 mx-auto prose dark:prose-invert dark:text-white">
     {{.Content}}
