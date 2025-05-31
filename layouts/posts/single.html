@@ -1,12 +1,12 @@
 {{ define "main" }}
 
-{{/* FORÇANDO O CUSTOM CSS DIRETAMENTE NO SINGLE.HTML PARA TESTE */}}
+{{/* SEU BLOCO DE TESTE PARA CUSTOM CSS (MANTIDO COMO VOCÊ TINHA) */}}
 {{ $customCSS := resources.Get "css/custom.css" }}
 {{ if $customCSS }}
     {{ if eq hugo.Environment "production" }}
         {{ $customCSS = $customCSS | fingerprint | resources.PostProcess }}
     {{ end }}
-    <link rel="stylesheet" href="{{ $customCSS.RelPermalink }}" integrity="{{ $customCSS.Data.Integrity }}">
+    <link rel="stylesheet" href="{{ $customCSS.RelPermalink }}" {{ if eq hugo.Environment "production" }}integrity="{{ $customCSS.Data.Integrity }}"{{ end }}>
     {{ `` | safeHTML }}
 {{ else }}
     {{ warnf "DEBUG SINGLE.HTML: custom.css NÃO ENCONTRADO!" }}
@@ -14,34 +14,106 @@
 {{ end }}
 {{/* FIM DO BLOCO DE TESTE DO CUSTOM CSS */}}
 
-<article>
-  <header class="mb-4 bg-primary-600">
-  </header>
-  <div class="max-w-4xl mx-auto mt-8 mb-2">
-    {{ with .Params.images }}
-    {{ range first 1 . }} {{/* Pega a primeira imagem da lista */}}
-        {{ $imagePath := . }}
-        {{/* Verifica se a imagem existe em static (forma mais simples) */}}
-        {{ if fileExists (printf "static/%s" $imagePath) }}
-            <img src="{{ $imagePath | relURL }}" alt="{{ $.Title }} - Imagem de Destaque" class="mx-auto my-4 rounded-lg shadow-lg">
-        {{ else }}
-            {{/* Ou tenta carregar de assets se você quiser processar a imagem */}}
-            {{ $imageResource := resources.Get $imagePath }}
-            {{ if $imageResource }}
-                {{ $processedImage := $imageResource.Fill "768x400 smart" }} {{/* Exemplo de processamento */}}
-                <img src="{{ $processedImage.RelPermalink }}" width="{{ $processedImage.Width }}" height="{{ $processedImage.Height }}" alt="{{ $.Title }} - Imagem de Destaque" class="mx-auto my-4 rounded-lg shadow-lg">
-            {{ else }}
-                {{ warnf "Imagem de destaque '%s' definida no front matter não encontrada em static/ ou assets/" $imagePath }}
+<article class="py-8">
+    <header class="mb-8">
+        <div class="container mx-auto px-4"> {{/* Para centralizar e adicionar padding lateral */}}
+            
+            {{/* Título Principal do Post */}}
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight text-gray-900 dark:text-white mb-4 text-center md:text-left">
+                {{ .Title }}
+            </h1>
+            
+            {{/* Subtítulo (se existir no front matter) */}}
+            {{ with .Params.subtitle }}
+                <p class="text-xl text-gray-600 dark:text-gray-400 mb-6 text-center md:text-left">{{ . }}</p>
             {{ end }}
-        {{ end }}
-    {{ end }}
-{{ end }}
-  </div>
-  <div class="max-w-2xl px-6 pt-6 pb-16 mx-auto prose dark:prose-invert dark:text-white">
-    {{.Content}}
-  </div>
-  <div class="max-w-2xl px-6 pb-16 mx-auto comments-container">
-    {{- partial "comments.html" . -}}
-  </div>
+
+            {{/* Container Flex para Imagem de Destaque e Metadados/Resumo Curto */}}
+            <div class="flex flex-col md:flex-row md:items-start md:gap-6 lg:gap-8">
+              
+                {{/* Coluna da Imagem de Destaque */}}
+                <div class="md:w-1/3 lg:w-1/4 w-full mb-6 md:mb-0">
+                    {{ with .Params.images }}
+                        {{ range first 1 . }} {{/* Pega a primeira imagem da lista */}}
+                            {{ $imagePath := . }}
+                            {{ $imageResource := "" }}
+                            {{ $isStaticImage := false }}
+
+                            {{/* Primeiro, tenta como um recurso de assets (global ou da página) */}}
+                            {{ $imageResource = resources.Get $imagePath }} {{/* Tenta em /assets/images/posts/arquivo.jpg */}}
+                            {{ if not $imageResource }}{{ $imageResource = $.Resources.GetMatch $imagePath }}{{ end }} {{/* Tenta como recurso da página */}}
+
+                            {{ if $imageResource }}
+                                {{/* Processa a imagem se for um recurso Hugo (de assets/ ou Page Bundle) */}}
+                                {{/* Ajuste "600x400" para as proporções e tamanho desejados para o seu "retângulo" */}}
+                                {{ $processedImage := $imageResource.Fill "600x400 smart" }} 
+                                <img src="{{ $processedImage.RelPermalink }}" 
+                                     width="{{ $processedImage.Width }}" 
+                                     height="{{ $processedImage.Height }}" 
+                                     alt="{{ $.Title }} - Imagem de Destaque" 
+                                     class="rounded-lg shadow-lg w-full h-auto object-cover">
+                            {{/* Se não encontrou em assets, tenta como arquivo estático */}}
+                            {{ else if fileExists (printf "static/%s" $imagePath) }}
+                                {{ $isStaticImage = true }}
+                                <img src="{{ $imagePath | relURL }}" 
+                                     alt="{{ $.Title }} - Imagem de Destaque" 
+                                     class="rounded-lg shadow-lg w-full h-auto object-cover">
+                            {{ else }}
+                                {{ warnf "Imagem de destaque '%s' definida em .Params.images não encontrada em assets, recursos da página ou na pasta static." $imagePath }}
+                            {{ end }}
+                        {{ end }}
+                    {{ else }}
+                        {{/* Opcional: Mostrar um placeholder se não houver imagem no front matter */}}
+                        {{ end }}
+                </div>
+
+                {{/* Coluna para Metadados do Post e/ou um breve resumo */}}
+                <div class="md:w-2/3 lg:w-3/4 w-full">
+                    <div class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                        <span>Publicado em {{ .Date.Format (.Site.Params.DateFormat | default "2 de Janeiro de 2006") }}</span>
+                        {{ if .Site.Params.ShowReadingTime }}
+                            <span class="mx-1">&middot;</span>
+                            <span>{{ .ReadingTime }} min de leitura</span>
+                        {{ end }}
+                        {{ with .Params.author }}
+                            <span class="mx-1">&middot;</span>
+                            <span>Por {{ . }}</span>
+                        {{ end }}
+                    </div>
+
+                    {{/* Tags do Post */}}
+                    {{ with .Params.tags }}
+                    <div class="mb-4">
+                        <span class="font-semibold text-gray-700 dark:text-gray-300">Tags:</span>
+                        {{ range . }}
+                            <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="inline-block bg-gray-200 dark:bg-gray-700 rounded-full px-3 py-1 text-xs font-semibold text-gray-700 dark:text-gray-200 mr-2 mb-2 hover:bg-primary-500 dark:hover:bg-primary-400 hover:text-white dark:hover:text-black transition-colors duration-150">#{{ . }}</a>
+                        {{ end }}
+                    </div>
+                    {{ end }}
+
+                    {{/* Resumo do post, se você quiser um resumo aqui antes do conteúdo principal */}}
+                    {{/* Se o seu front matter tiver um campo 'summary' ou 'resume':
+                    {{ with .Params.summary | or .Params.resume }}
+                        <p class="text-gray-700 dark:text-gray-300 mb-6">{{ . }}</p>
+                    {{ else }}
+                        <p class="text-gray-700 dark:text-gray-300 mb-6">{{ .Summary | truncate 160 }}</p>
+                    {{ end }}
+                    */}}
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    {{/* Conteúdo Principal do Post (Markdown) */}}
+    <div class="max-w-2xl px-6 pt-6 pb-16 mx-auto prose dark:prose-invert dark:text-white">
+        {{ .Content }}
+    </div>
+
+    {{/* Seção de Comentários */}}
+    <div class="max-w-2xl px-6 pb-16 mx-auto comments-container">
+        {{- partial "comments.html" . -}}
+    </div>
 </article>
+
 {{ end }}
