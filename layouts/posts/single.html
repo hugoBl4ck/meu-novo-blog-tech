@@ -34,27 +34,30 @@
                 {{ $imageResource = $.Resources.GetMatch . }}
             {{ end }}
 
-            {{/* Container para a imagem de destaque, para controlar o max-width se necessário */}}
-            {{/* A classe max-w-4xl aqui tenta alinhar a largura da imagem com a do conteúdo abaixo se seu conteúdo tiver um container similar.
-                 Seu 'prose' tem max-w-2xl, então você pode preferir max-w-2xl ou max-w-3xl para a imagem.
-                 Ajuste conforme o design desejado. */}}
+            {{/* Container para a imagem de destaque. 
+                 Ajuste max-w-4xl para a largura desejada do banner (ex: max-w-full para largura total do container do artigo, 
+                 ou max-w-2xl/3xl se quiser que seja mais estreito que o texto principal, mas geralmente para banner é mais largo).
+            */}}
             <div class="max-w-4xl mx-auto mb-6 px-4"> 
                 {{ if $imageResource }}
-                    {{/* ---- AJUSTE AS DIMENSÕES DE PROCESSAMENTO AQUI ---- */}}
-                    {{/* LARGURA x ALTURA. Ex: 800px de largura e 200px de altura para um banner */}}
-                    {{/* "smart" tenta encontrar o ponto focal. "Center" também é uma opção. */}}
-                    {{ $processedImage := $imageResource.Fill "800x200 smart" }} 
+                    {{/* Redimensiona a imagem para uma largura grande, a altura será controlada pelo CSS da tag <img> */}}
+                    {{/* Ex: Largura de 1200px. A altura real da imagem redimensionada manterá a proporção. */}}
+                    {{ $processedImage := $imageResource.Resize "1200x" }} 
                     <img src="{{ $processedImage.RelPermalink }}" 
                          width="{{ $processedImage.Width }}" 
                          height="{{ $processedImage.Height }}" 
                          alt="{{ $.Title }} - Imagem de Destaque" 
-                         class="w-full rounded-lg shadow-lg object-cover" 
-                         style="max-height: 250px;"> {{/* max-height opcional via CSS para controle extra */}}
+                         class="w-full rounded-lg shadow-lg" 
+                         style="height: 200px; object-fit: cover; object-position: center center;">
+                         {{/* ALTURA DO BANNER: ajuste 'height: 200px;' para a altura desejada (ex: 150px, 250px) */}}
+                         {{/* OBJECT-POSITION: ajuste 'center center' para 'center top', 'center bottom', etc., para focar na parte certa da imagem */}}
                 {{ else if $isStaticImage }}
                     <img src="{{ $imagePath | relURL }}" 
                          alt="{{ $.Title }} - Imagem de Destaque" 
-                         class="w-full rounded-lg shadow-lg object-cover" 
-                         style="height: 200px; max-height: 250px;"> {{/* Para imagens estáticas, controle altura com CSS */}}
+                         class="w-full rounded-lg shadow-lg" 
+                         style="height: 200px; object-fit: cover; object-position: center center;">
+                         {{/* ALTURA DO BANNER: ajuste 'height: 200px;' */}}
+                         {{/* OBJECT-POSITION: ajuste 'center center' */}}
                 {{ else }}
                     {{ warnf "Imagem de destaque '%s' definida em .Params.images não encontrada." $imagePath }}
                 {{ end }}
@@ -65,7 +68,7 @@
 
 
     <header class="mb-8">
-        <div class="container mx-auto px-4 text-center"> {{-- Centraliza título e metadados --}}
+        <div class="container mx-auto px-4 text-center">
             
             <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight text-gray-900 dark:text-white mb-4">
                 {{ .Title }}
