@@ -16,10 +16,6 @@ pagerSize = 9             # Número de posts por página (o exemplo do TailBliss
   [services.googleAnalytics]
     id = "G-GSEPCP397S"
 
-# O tema TailBliss especifica um arquivo JS para modo escuro em seus assets
-# Se você não for modificar este JS do tema, esta linha pode não ser necessária aqui,
-# pois o tema o carregará de seus próprios assets.
-# darkmode_js = ["assets/js/darkmode.js"] # Verifique se o tema espera isso ou se já faz automaticamente
 
 enableInlineShortcodes = true # Permite shortcodes dentro de parágrafos
 
@@ -239,7 +235,7 @@ enableInlineShortcodes = true # Permite shortcodes dentro de parágrafos
     disable = true # Desabilitar Disqus se estiver usando Giscus
   [privacy.googleAnalytics]
     # anonymizeIP = false
-    disable = true # Desabilitar se não usar GA
+    disable = false # Desabilitar se não usar GA
     # respectDoNotTrack = false
     # useSessionStorage = false
   [privacy.instagram]

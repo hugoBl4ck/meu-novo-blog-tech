@@ -1,7 +1,7 @@
-baseURL: ''
-title: TailBliss
-languageCode: en-us
-DefaultContentLanguage: en
+baseURL: 'https://elaborate-scone-2651ee.netlify.app/'
+title: Blog do Hugo Robot
+languageCode: pt-br
+DefaultContentLanguage: pt-br
 enableEmoji: true
 enableGitInfo: true
 enableRobotsTXT: true
@@ -47,11 +47,11 @@ markup:
       xhtml: false
 
 params:
-  author: Nusser Studios
+  author: Hugo Robot
   authorimage: ../assets/images/global/author.webp
   og_image: /images/tailbliss-cover.png
-  moto: "Super Fast, and Flexible"
-  description: "A Hugo theme built with love, using TailwindCSS 3, Alpine.JS, and Hugo Pipes. Images are optimized for use with Hugo Pipes for WebP format."
+  moto: "Explorando LLMs, Cibersegurança e Tecnologia"
+  description: "Descubra insights, tutoriais sobre inteligência artificial, LLMs e cibersegurança com artigos curtos e práticos."
   disable_theme_toggle: false
   disable_stay_uptodate: false
 
