@@ -75,7 +75,7 @@
             {{ end }}
 
             <div class="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                <span>Publicado em {{ .Date.Format (.Site.Params.DateFormat | default "2 January de 2006") }}</span>
+                <span>Publicado em {{ .Date.Format (.Site.Params.DateFormat | default "2 de Janeiro de 2006") }}</span>
                 {{ if .Site.Params.ShowReadingTime }}
                     <span class="mx-1">&middot;</span>
                     <span>{{ .ReadingTime }} min de leitura</span>

@@ -116,7 +116,7 @@ enableInlineShortcodes = true # Permite shortcodes dentro de parágrafos
   disable_theme_toggle = false # Permite o botão de alternar tema claro/escuro
   disable_stay_uptodate = true # true para esconder a seção de "Stay up to date" (newsletter) do tema, se não for usar
 
-  dateFormat = "2 de Janeiro de 2006"
+  DateFormat = "2 de Janeiro de 2006"
   mainSections = ["posts"] # Diz ao tema que seus posts principais estão em content/posts/
   ShowReadingTime = true
   # ShowShareButtons = true # Descomente se você implementar os botões de compartilhamento e o partial social_share_buttons.html
