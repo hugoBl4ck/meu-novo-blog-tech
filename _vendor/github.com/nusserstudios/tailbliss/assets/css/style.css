@@ -348,7 +348,7 @@ input:where([type='button']),
 input:where([type='reset']),
 input:where([type='submit']) {
   -webkit-appearance: button;
-  /* 1 */
+  appearance: button;
   background-color: transparent;
   /* 2 */
   background-image: none;
@@ -395,7 +395,7 @@ Correct the cursor style of increment and decrement buttons in Safari.
 
 [type='search'] {
   -webkit-appearance: textfield;
-  /* 1 */
+  appearance: button;
   outline-offset: -2px;
   /* 2 */
 }
@@ -533,9 +533,7 @@ iframe,
 embed,
 object {
   display: block;
-  /* 1 */
-  vertical-align: middle;
-  /* 2 */
+
 }
 
 /*
@@ -3548,7 +3546,7 @@ video {
 .ease-out {
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }
-
+body {
 font-family: ui-sans-serif,
 system-ui,
 -apple-system,
@@ -3565,7 +3563,7 @@ NotoColorEmoji,
 Segoe UI Symbol,
 Android Emoji,
 EmojiSymbols;
-
+}
 /* Custom CSS */
 
 .prose :where(h1):not(:where([class~="not-prose"] *)) {
