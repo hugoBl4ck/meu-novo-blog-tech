@@ -1,6 +1,6 @@
 
 ---
-title: "Todos os Posts do Blog" # Ou o título que você quer para a página /posts/
+title: "Todos os posts do Blog" # Ou o título que você quer para a página /posts/
 # Outros parâmetros de front matter, se necessário
 ---
 
