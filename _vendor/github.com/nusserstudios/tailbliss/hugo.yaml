@@ -106,9 +106,9 @@ params:
     instagram:
       enabled: true
       url: 'https://instagram.com/blkstudio.ia'
-    telegram:
-      enabled: true
-      url: 'https://t.me/hugorobotlaboratorio'
+    twitter:
+      enabled: false
+      url: 'https://twitter.com/nusserstudios'
     
 
 menu:
