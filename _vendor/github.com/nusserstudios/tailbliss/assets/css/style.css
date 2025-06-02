@@ -4232,7 +4232,7 @@ EmojiSymbols;
   text-decoration-line: underline;
 }
 
-.prose-a\:text-blue-600 :is(:where(a):not(:where([class~="not-prose"],[class~="not-prose"] *))) {
+.prose-a\:text-blue-950 :is(:where(a):not(:where([class~="not-prose"],[class~="not-prose"] *))) {
   --tw-text-opacity: 1;
   color: rgb(37 99 235 / var(--tw-text-opacity));
 }
