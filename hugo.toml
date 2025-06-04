@@ -149,22 +149,28 @@ enableInlineShortcodes = true # Permite shortcodes dentro de parágrafos
   # disable_stay_uptodate = true (já coloquei acima)
 
   # Redes Sociais (Estrutura do TailBliss exampleSite)
-  [[params.social_media]]
-  name = "telegram"
-  url = "https://t.me/hugorobotlaboratorio"
-  enabled = true
-  # [[params.social_media]] # Descomente e configure se quiser usar
-  #   name = "github" # Nome do ícone (o tema deve ter os SVGs ou usar Font Awesome)
-  #   url = "https://github.com/hugoBl4ck" # <<== SEU GITHUB
-  #   enabled = true
-  # [[params.social_media]]
-  #   name = "linkedin"
-  #   url = "https://linkedin.com/in/SEU_LINKEDIN" # <<== SEU LINKEDIN
-  #   enabled = true
-  # [[params.social_media]]
-  #   name = "twitter"
-  #   url = "https://twitter.com/SEU_TWITTER" # <<== SEU TWITTER
-  #   enabled = true
+  [params.social_media]
+    [params.social_media.Facebook]
+      enabled = true
+      url = "https://facebook.com/blk.studio1" # Use sua URL real do Facebook
+      # Se o tema usar um ícone específico, pode haver um campo 'icon' aqui
+      icon = "facebook" 
+
+    [params.social_media.Instagram]
+      enabled = true
+      url = "https://instagram.com/blkstudio.ia" # Use sua URL real do Instagram
+      icon = "instagram"
+
+    [params.social_media.GitHub]
+      enabled = true
+      url = "https://github.com/hugoBl4ck" # Use sua URL real do GitHub
+      icon = "github"
+    
+    [params.social_media.Telegram] # Adicione esta seção para o Telegram
+      enabled = true
+      url = "https://t.me/hugorobotlaboratorio"
+ 
+  
   
   # Comentários (Giscus)
   comments = true
