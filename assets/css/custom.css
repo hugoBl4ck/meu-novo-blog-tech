@@ -1,23 +1,48 @@
-/* Em assets/css/custom.css */
+/* assets/css/custom.css */
+
+/* --- AJUSTES DE TAMANHO DE FONTE --- */
+
+/* Título Principal do Post (H1 no template single.html) */
+/* Mantenha apenas se você precisa sobrescrever o Tailwind de forma muito específica
+   e não pode fazê-lo com classes no HTML ou no tailwind.config.js */
+article > header h1 {
+    /* Use cores do seu tema Tailwind se possível, ou uma cor hardcoded se for única.
+       Se você quer que isso seja primary-900 no modo claro e primary-100 no modo escuro,
+       é melhor usar classes Tailwind no HTML: text-primary-900 dark:text-primary-100
+       e remover esta regra CSS. */
+    /* Exemplo, se precisar de uma cor específica que não é do Tailwind: */
+    /* color: #2d3748 !important; */
+    font-size: 2.5rem !important; /* Ajuste se realmente necessário */
+}
+/* Se você usar classes Tailwind no HTML para o H1 do header,
+   esta regra .dark também pode ser removida. */
+/* .dark article > header h1 {
+    color: #e2e8f0 !important;
+} */
 
 
-.prose img { /* Imagens dentro da área de conteúdo estilizada pelo 'prose' */
-    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+/* Títulos H1, H2, H3, Parágrafos e Listas DENTRO do conteúdo .prose */
+/* REMOVA TODAS AS REGRAS DE COR E FONT-SIZE/LINE-HEIGHT AQUI
+   DEIXE O tailwind.config.js GERENCIAR ISSO ATRAVÉS DO PLUGIN @tailwindcss/typography. */
+/* Exemplo de como NÃO DEVE FICAR:
+.prose h1 { color: #1a202c !important; font-size: 2rem !important; }
+.dark .prose h1 { color: #f7fafc !important; }
+.prose h2 { color: #4a5568 !important; font-size: 1.65rem !important; }
+.dark .prose h2 { color: #cbd5e1 !important; }
+.prose h3 { color: #718096 !important; font-size: 1.35rem !important; }
+.dark .prose h3 { color: #a0aec0 !important; }
+.prose p, .prose li, .prose { font-size: 0.95rem !important; line-height: 1.7 !important; }
+*/
+
+
+/* --- Efeito Minimalista para Imagens ao Passar o Mouse --- */
+/* Esta é uma boa regra para manter aqui, pois é um efeito mais complexo */
+.prose img {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    border-radius: 4px;
 }
 
 .prose img:hover {
     transform: scale(1.03);
-    opacity: 0.85;
-}
-.prose h1, .prose dark:h1,
-.prose h2, .prose dark:h2,
-.prose h3, .prose dark:h3 {
-    /* Cor para modo claro (exemplo: um cinza escuro suave) */
-    color: #374151; /* Cor: gray-700 do Tailwind */
-}
-
-/* Se o tema usar a classe 'dark' no body ou html para modo escuro */
-.dark .prose h1, .dark .prose h2, .dark .prose h3 {
-    /* Cor para modo escuro (exemplo: um cinza claro) */
-    color: #d1d5db; /* Cor: gray-300 do Tailwind */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
