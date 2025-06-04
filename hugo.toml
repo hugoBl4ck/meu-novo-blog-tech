@@ -149,6 +149,10 @@ enableInlineShortcodes = true # Permite shortcodes dentro de parágrafos
   # disable_stay_uptodate = true (já coloquei acima)
 
   # Redes Sociais (Estrutura do TailBliss exampleSite)
+  [[params.social_media]]
+  name = "telegram"
+  url = "https://t.me/hugorobotlaboratorio"
+  enabled = true
   # [[params.social_media]] # Descomente e configure se quiser usar
   #   name = "github" # Nome do ícone (o tema deve ter os SVGs ou usar Font Awesome)
   #   url = "https://github.com/hugoBl4ck" # <<== SEU GITHUB

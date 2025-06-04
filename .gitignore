@@ -3,6 +3,7 @@
 /resources/
 .hugo_build.lock
 hugo_stats.json
+_vendor/
 
 # Cache e artefatos do Hugo Modules
 
