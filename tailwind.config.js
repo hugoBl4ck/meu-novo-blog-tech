@@ -20,44 +20,43 @@ module.exports = {
       typography: (theme) => ({
         DEFAULT: {
           css: {
-            '--tw-prose-body': theme('colors.zinc[800]'),
-            '--tw-prose-headings': theme('colors.zinc[900]'),
-            '--tw-prose-lead': theme('colors.zinc[700]'),
-            '--tw-prose-links': theme('colors.zinc[900]'),
-            '--tw-prose-bold': theme('colors.zinc[900]'),
-            '--tw-prose-counters': theme('colors.zinc[600]'),
-            '--tw-prose-bullets': theme('colors.zinc[400]'),
-            '--tw-prose-hr': theme('colors.zinc[300]'),
-            '--tw-prose-quotes': theme('colors.zinc[900]'),
-            '--tw-prose-quote-borders': theme('colors.zinc[300]'),
-            '--tw-prose-captions': theme('colors.zinc[700]'),
-            // As cores de código e pre-code ainda usam 'indigo'
-            // Você pode mudar para 'primary' se quiser que sigam o slate.
-            '--tw-prose-code': theme('colors.indigo[500]'),
-            '--tw-prose-pre-code': theme('colors.indigo[300]'),
-            '--tw-prose-pre-bg': theme('colors.gray[900]'),
-            '--tw-prose-th-borders': theme('colors.zinc[300]'),
-            '--tw-prose-td-borders': theme('colors.zinc[200]'),
-            '--tw-prose-invert-body': theme('colors.zinc[200]'),
-            '--tw-prose-invert-headings': theme('colors.white'),
-            '--tw-prose-invert-lead': theme('colors.zinc[300]'),
-            // As cores de links invertidas ainda usam 'indigo'
-            '--tw-prose-invert-links': theme('colors.indigo[400]'),
-            '--tw-prose-invert-bold': theme('colors.white'),
-            '--tw-prose-invert-counters': theme('colors.zinc[400]'),
-            '--tw-prose-invert-bullets': theme('colors.zinc[200]'),
-            '--tw-prose-invert-hr': theme('colors.zinc[500]'),
-            '--tw-prose-invert-quotes': theme('colors.zinc[100]'),
-            '--tw-prose-invert-quote-borders': theme('colors.zinc[700]'),
-            '--tw-prose-invert-captions': theme('colors.zinc[400]'),
-            // As cores de código invertidas ainda usam 'indigo'
-            '--tw-prose-invert-code': theme('colors.indigo[400]'),
-            '--tw-prose-invert-pre-code': theme('colors.indigo[300]'),
-            '--tw-prose-invert-pre-bg': theme('colors.gray[900]'),
-            '--tw-prose-invert-th-borders': theme('colors.zinc[100]'),
-            '--tw-prose-invert-td-borders': theme('colors.zinc[500]'),
+            // Alterado para usar a cor 'primary' (slate)
+            '--tw-prose-body': theme('colors.primary[800]'), // Usará slate-800
+            '--tw-prose-headings': theme('colors.primary[900]'), // Usará slate-900
+            '--tw-prose-lead': theme('colors.primary[700]'), // Usará slate-700
+            '--tw-prose-links': theme('colors.primary[700]'), // Usará slate-700
+            '--tw-prose-bold': theme('colors.primary[900]'), // Usará slate-900
+            '--tw-prose-counters': theme('colors.primary[600]'), // Usará slate-600
+            '--tw-prose-bullets': theme('colors.primary[400]'), // Usará slate-400
+            '--tw-prose-hr': theme('colors.primary[300]'), // Usará slate-300
+            '--tw-prose-quotes': theme('colors.primary[900]'), // Usará slate-900
+            '--tw-prose-quote-borders': theme('colors.primary[300]'), // Usará slate-300
+            '--tw-prose-captions': theme('colors.primary[700]'), // Usará slate-700
+            // Cores de código e pre-code agora usam 'primary' (slate)
+            '--tw-prose-code': theme('colors.primary[500]'), // Usará slate-500
+            '--tw-prose-pre-code': theme('colors.primary[300]'), // Usará slate-300
+            '--tw-prose-pre-bg': theme('colors.gray[900]'), // Mantido gray[900] para fundo de código escuro
 
-            // Tamanhos de fonte personalizados
+            // Cores para o modo escuro (invertido) - alterado para usar 'primary' (slate)
+            '--tw-prose-invert-body': theme('colors.primary[200]'), // Usará slate-200
+            '--tw-prose-invert-headings': theme('colors.white'), // Mantido branco para contraste
+            '--tw-prose-invert-lead': theme('colors.primary[300]'), // Usará slate-300
+            '--tw-prose-invert-links': theme('colors.primary[400]'), // Usará slate-400
+            '--tw-prose-invert-bold': theme('colors.white'), // Mantido branco
+            '--tw-prose-invert-counters': theme('colors.primary[400]'), // Usará slate-400
+            '--tw-prose-invert-bullets': theme('colors.primary[200]'), // Usará slate-200
+            '--tw-prose-invert-hr': theme('colors.primary[500]'), // Usará slate-500
+            '--tw-prose-invert-quotes': theme('colors.primary[100]'), // Usará slate-100
+            '--tw-prose-invert-quote-borders': theme('colors.primary[700]'), // Usará slate-700
+            '--tw-prose-invert-captions': theme('colors.primary[400]'), // Usará slate-400
+            // Cores de código invertidas agora usam 'primary' (slate)
+            '--tw-prose-invert-code': theme('colors.primary[400]'), // Usará slate-400
+            '--tw-prose-invert-pre-code': theme('colors.primary[300]'), // Usará slate-300
+            '--tw-prose-invert-pre-bg': theme('colors.gray[900]'), // Mantido gray[900]
+            '--tw-prose-invert-th-borders': theme('colors.primary[100]'), // Usará slate-100
+            '--tw-prose-invert-td-borders': theme('colors.primary[500]'), // Usará slate-500
+
+            // Tamanhos de fonte personalizados (sem alteração, pois já estão ok)
             fontSize: '1rem',
             h1: {
               fontSize: '2.5rem',
