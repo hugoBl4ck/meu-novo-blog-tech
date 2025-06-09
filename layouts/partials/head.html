@@ -1,10 +1,9 @@
-
 {{- /* layouts/partials/site/head.html */ -}}
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
-{{- /* Favicons e Manifest - pegue os do tema original ou os seus */}}
+{{- /* Favicons e Manifest */}}
 <link rel="apple-touch-icon" sizes="180x180" href="{{ "/favicon/apple-touch-icon.png" | relURL }}">
 <link rel="icon" type="image/png" sizes="32x32" href="{{ "/favicon/favicon-32x32.png" | relURL }}">
 <link rel="icon" type="image/png" sizes="16x16" href="{{ "/favicon/favicon-16x16.png" | relURL }}">
@@ -13,55 +12,63 @@
 <meta name="msapplication-TileColor" content="#da532c">
 <meta name="theme-color" content="#ffffff">
 
-{{- /* Título e Descrição - Lógica do Hugo para SEO */}}
+{{- /* Título e Descrição para SEO */}}
 <title itemprop="name">{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
 <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Summary }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}{{ end }}">
 
-{{- /* Google Site Verification - Puxando do hugo.toml */}}
+{{- /* Verificações de Sites */}}
 {{- with .Site.Params.googleSiteVerification -}}
 <meta name="google-site-verification" content="{{ . }}" />
 {{- end -}}
 
-{{- /* Open Graph e Twitter Cards (exemplo básico) */}}
+{{- /* Open Graph (para Facebook, WhatsApp, etc.) */}}
 <meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }}{{ end }}">
 <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Summary }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}{{ end }}">
 <meta property="og:url" content="{{ .Permalink }}">
 <meta property="og:site_name" content="{{ .Site.Title }}">
-<meta property="og:locale" content="{{ .Site.Language.Lang }}_{{ upper .Site.Language.Lang }}"> {{/* Ajusta para pt_PT, en_US etc. */}}
-{{- with .Site.Params.og_image -}}
-<meta property="og:image" content="{{ . | absURL }}">
-{{- else -}}
-  {{- $images := .Resources.ByType "image" -}}
-  {{- $featured := $images.GetMatch "*feature*" -}}
-  {{- if not $featured }}{{ $featured = $images.GetMatch "{*cover*,*thumbnail*}" }}{{ end -}}
-  {{- with $featured -}}
-<meta property="og:image" content="{{ $featured.Permalink }}">
+<meta property="og:locale" content="{{ .Site.Language.Lang }}_{{ upper .Site.Language.Lang }}">
+{{- with .Params.featured_image | default .Site.Params.og_image -}}
+  {{- with resources.Get . -}}
+<meta property="og:image" content="{{ .Permalink }}">
   {{- end -}}
 {{- end -}}
 {{ if .IsPage }}<meta property="og:type" content="article">{{ else }}<meta property="og:type" content="website">{{ end }}
-{{/* Adicione Twitter card tags se desejar */}}
 
-{{- /* Script do tema claro/escuro (do tema Tailbliss) */ -}}
+{{- /* Twitter Cards (NOVO BLOCO ADICIONADO) */}}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }}{{ end }}">
+<meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Summary }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}{{ end }}">
+{{- with .Site.Params.twitter_handle -}}
+<meta name="twitter:site" content="@{{ . }}">
+<meta name="twitter:creator" content="@{{ . }}">
+{{- end -}}
+{{- with .Params.featured_image | default .Site.Params.og_image -}}
+  {{- with resources.Get . -}}
+<meta name="twitter:image" content="{{ .Permalink }}">
+  {{- end -}}
+{{- end -}}
+
+{{- /* Script do tema claro/escuro */}}
 {{- $script := resources.Get "js/darkmode.js" -}}
 <script>{{ $script.Content | safeJS }}</script>
 
 {{- /* Link para o CSS principal */}}
 {{- $styles := resources.Get "css/style.css" | postCSS -}}
 {{- if eq hugo.Environment "production" -}}
-  {{- /* Em produção, aplica fingerprint e PostProcess */ -}}
   {{- $styles = $styles | fingerprint | resources.PostProcess -}}
   <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}">
 {{- else -}}
-  {{- /* Em desenvolvimento (hugo server), serve o CSS diretamente */ -}}
   <link rel="stylesheet" href="{{ $styles.RelPermalink }}">
 {{- end -}}
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-GSEPCP397S"></script>
+{{- /* Google Analytics (BLOCO MODIFICADO) */}}
+{{- with .Site.Params.googleAnalytics -}}
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'G-GSEPCP397S');
+  gtag('config', '{{ . }}');
 </script>
+{{- end -}}
