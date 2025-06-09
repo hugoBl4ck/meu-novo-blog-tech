@@ -1,48 +1,60 @@
 /* assets/css/custom.css */
 
-/* --- AJUSTES DE TAMANHO DE FONTE --- */
+/* --- CORES DE TÍTULO E CORPO DO POST --- */
 
 /* Título Principal do Post (H1 no template single.html) */
-/* Mantenha apenas se você precisa sobrescrever o Tailwind de forma muito específica
-   e não pode fazê-lo com classes no HTML ou no tailwind.config.js */
 article > header h1 {
-    /* Use cores do seu tema Tailwind se possível, ou uma cor hardcoded se for única.
-       Se você quer que isso seja primary-900 no modo claro e primary-100 no modo escuro,
-       é melhor usar classes Tailwind no HTML: text-primary-900 dark:text-primary-100
-       e remover esta regra CSS. */
-    /* Exemplo, se precisar de uma cor específica que não é do Tailwind: */
-    /* color: #2d3748 !important; */
-    font-size: 2.5rem !important; /* Ajuste se realmente necessário */
+    color: #2d3748 !important; /* MODO CLARO: um cinza escuro para o título principal */
+    font-size: 2.5rem !important; /* Tamanho ajustado para o H1 principal */
 }
-/* Se você usar classes Tailwind no HTML para o H1 do header,
-   esta regra .dark também pode ser removida. */
-/* .dark article > header h1 {
-    color: #e2e8f0 !important;
-} */
+.dark article > header h1 {
+    color: #e2e8f0 !important; /* MODO ESCURO: um cinza claro para o título principal */
+}
 
+/* Títulos H1 DENTRO do conteúdo .prose (do seu Markdown) */
+.prose h1 {
+    color: #1a202c !important; /* MODO CLARO: um cinza bem escuro para H1 do conteúdo */
+    font-size: 2rem !important; /* Tamanho ajustado */
+}
+.dark .prose h1 {
+    color: #f7fafc !important; /* MODO ESCURO: um branco quase total para H1 do conteúdo */
+}
 
-/* Títulos H1, H2, H3, Parágrafos e Listas DENTRO do conteúdo .prose */
-/* REMOVA TODAS AS REGRAS DE COR E FONT-SIZE/LINE-HEIGHT AQUI
-   DEIXE O tailwind.config.js GERENCIAR ISSO ATRAVÉS DO PLUGIN @tailwindcss/typography. */
-/* Exemplo de como NÃO DEVE FICAR:
-.prose h1 { color: #1a202c !important; font-size: 2rem !important; }
-.dark .prose h1 { color: #f7fafc !important; }
-.prose h2 { color: #4a5568 !important; font-size: 1.65rem !important; }
-.dark .prose h2 { color: #cbd5e1 !important; }
-.prose h3 { color: #718096 !important; font-size: 1.35rem !important; }
-.dark .prose h3 { color: #a0aec0 !important; }
-.prose p, .prose li, .prose { font-size: 0.95rem !important; line-height: 1.7 !important; }
-*/
+/* Títulos H2 DENTRO do conteúdo .prose (do seu Markdown) */
+.prose h2 {
+    color: #4a5568 !important; /* MODO CLARO: um cinza médio para H2 do conteúdo */
+    font-size: 1.65rem !important; /* Tamanho ajustado */
+}
+.dark .prose h2 {
+    color: #cbd5e1 !important; /* MODO ESCURO: um cinza claro para H2 do conteúdo */
+}
 
+/* Títulos H3 DENTRO do conteúdo .prose (do seu Markdown) */
+.prose h3 {
+    color: #718096 !important; /* MODO CLARO: um cinza mais suave para H3 do conteúdo */
+    font-size: 1.35rem !important; /* Tamanho ajustado */
+}
+.dark .prose h3 {
+    color: #a0aec0 !important; /* MODO ESCURO: um cinza médio-claro para H3 do conteúdo */
+}
+
+/* Parágrafos e Texto do Corpo Principal DENTRO do conteúdo .prose */
+.prose p,
+.prose li, /* Para itens de lista também */
+.prose { /* Aplica um padrão à classe prose em geral */
+    font-size: 0.95rem !important; /* Um pouco menor que o padrão (geralmente 1rem ou 16px) */
+    line-height: 1.7 !important; /* Ajuste a altura da linha para boa legibilidade */
+}
+/* Para font-size e line-height, geralmente não é necessário uma regra .dark separada,
+   a menos que você queira que eles mudem com o tema. */
 
 /* --- Efeito Minimalista para Imagens ao Passar o Mouse --- */
-/* Esta é uma boa regra para manter aqui, pois é um efeito mais complexo */
 .prose img {
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    border-radius: 4px;
+    border-radius: 4px; 
 }
 
 .prose img:hover {
-    transform: scale(1.03);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transform: scale(1.03); 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); 
 }

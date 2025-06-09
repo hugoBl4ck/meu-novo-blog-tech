@@ -103,6 +103,7 @@ enableInlineShortcodes = true # Permite shortcodes dentro de parágrafos
 # Parâmetros do Site e Específicos do Tema (params)
 # -----------------------------------------------------------------------------
 [params]
+  customCSS = ["css/custom.css"]
   author = "Hugo Robot" # <<== SEU NOME DE AUTOR
   # authorimage = "/images/seu-avatar.webp" # Caminho para sua imagem de autor em static/images/
   logo = "/images/site-logo.svg" # <<== CRIE UMA IMAGEM DE PRÉVIA (ex: 1200x630px) em static/images/
@@ -271,3 +272,21 @@ enableInlineShortcodes = true # Permite shortcodes dentro de parágrafos
       # X-Content-Type-Options = "nosniff"
       # X-XSS-Protection = "1; mode=block"
       # Content-Security-Policy = "script-src 'self' https://giscus.app;" # Exemplo de CSP básica
+# Melhorias Adicionar Configurações de Performance
+[minify]
+  disableCSS = false
+  disableHTML = false
+  disableJS = false
+  disableJSON = false
+  disableSVG = false
+  disableXML = false
+# Melhorar Configurações de Imagem
+[imaging]
+  resampleFilter = "CatmullRom"
+  quality = 95
+  anchor = "smart"
+
+[sitemap]
+  changefreq = "weekly"
+  priority = 0.5
+  filename = "sitemap.xml"
