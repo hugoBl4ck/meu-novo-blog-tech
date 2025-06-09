@@ -14,16 +14,16 @@
                         {{ .Site.Params.Description}}
                     </p>
                 </div>
-                <div class="col-span-6">
-                    {{ $hero := resources.GetMatch "images/pages/logoazul.png" }}
+                <div class="col-span-6 h-80 sm:h-96"> {{ $hero := resources.GetMatch "images/pages/logoazul.png" }}
 
-                    {{ $thumb := ($hero.Fill "400x400 webp q90") }}
-                    {{ $large := ($hero.Fill "576x576 webp q90") }}
+    {{ $thumb := ($hero.Fill "400x400 webp q90") }}
+    {{ $large := ($hero.Fill "576x576 webp q90") }}
 
-                    <img srcset="
-                        {{- with $thumb.RelPermalink -}}{{.}} 400w{{- end -}}
-                        {{- with $large.RelPermalink -}}, {{.}} 576w{{- end -}}" src="{{ $hero.RelPermalink }}" width="100%" height="" alt="TailBliss Hero" class="w-full max-w-xl mx-auto rounded-lg" />
-                </div>
+    <img srcset="
+        {{- with $thumb.RelPermalink -}}{{.}} 400w{{- end -}}
+        {{- with $large.RelPermalink -}}, {{.}} 576w{{- end -}}" 
+        src="{{ $hero.RelPermalink }}" width="100%" height="" alt="TailBliss Hero" 
+        class="w-full h-full object-cover max-w-xl mx-auto rounded-lg" /> </div>
             </div>
         </div>
     </div>
@@ -188,14 +188,14 @@
                             </a>
                             <div class="p-6">
                                 <div class="flex-1">
-                                    <a href="{{.Permalink}}" class="block mt-2 text-2xl font-black text-gray-900 dark:text-gray-200 hover:text-primary-600 dark:hover:text-primary-500 hover:underline">
+                                    <a href="{{.Permalink}}" class="block mt-2 text-2xl font-black text-gray-900 dark:text-gray-200 dark:hover:text-primary-500 hover:underline">
                                         {{ .Title }}
                                     </a>
                                     <p class="mt-3 text-base text-gray-900 dark:text-gray-300">
                                         {{ .Params.summary }}
                                     </p>
                                 </div>
-                                <div class="flex pt-6 font-medium text-primary-600 dark:text-primary-100 text-md">
+                                <div class="flex pt-6 font-medium text-gray-900 dark:text-white text-md">
                                     <span class="pr-2 font-black">Tags:</span>
                                     {{ range $elem_index, $elem_val := (.GetTerms "tags") }}
                                     {{- if gt $elem_index 0 }}, {{ end -}}
