@@ -106,7 +106,7 @@ enableInlineShortcodes = true # Permite shortcodes dentro de parágrafos
   customCSS = ["css/custom.css"]
   author = "Hugo Robot" # <<== SEU NOME DE AUTOR
   # authorimage = "/images/seu-avatar.webp" # Caminho para sua imagem de autor em static/images/
-  logo = "/images/site-logo.svg" # <<== CRIE UMA IMAGEM DE PRÉVIA (ex: 1200x630px) em static/images/
+  logo = "/images/logo.jpg" # <<== CRIE UMA IMAGEM DE PRÉVIA (ex: 1200x630px) em static/images/
   moto = "Explorando LLMs, Cibersegurança e Tecnologia" # Seu slogan ou subtítulo
   description = "Descubra insights, tutoriais sobre inteligência artificial, LLMs e cibersegurança com artigos curtos e práticos." # <<== SUA DESCRIÇÃO
   googleSiteVerification = "Q-ixydznK_Ce9J_KG0QxKcIX_IGKA-dmFhCH888yYQc"
