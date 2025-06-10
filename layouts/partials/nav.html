@@ -4,16 +4,19 @@
 
             <a href="/" class="flex items-center text-gray-100 transition duration-1000 ease-in-out group">
                 
-                {{- /* A "caixa" que força o tamanho correto do SVG */ -}}
-                <div class="h-3 w-3 flex-shrink-0">
-                    <img src="/images/site-logo.svg" class="transition-opacity h-full w-full group-hover:opacity-50 group-focus:opacity-70" alt="{{ .Site.Title }} Logo" />
-                </div>
+                <a href="/" class="flex items-center text-gray-100 transition duration-1000 ease-in-out group">
+    
+    {{- /* Caixa com área de 32x32 pixels para o logo */ -}}
+    <div class="h-8 w-8 flex-shrink-0">
+        <img src="/images/site-logo.svg" class="h-full w-full" alt="{{ .Site.Title }} Logo" />
+    </div>
 
-                {{- /* O título do site alinhado ao lado do logo (sem mt-1) */ -}}
-                <div class="ml-3 text-xl font-black tracking-tight text-gray-100 uppercase transition-colors group-hover:text-gray-400/60">
-                    {{ .Site.Title }}
-                </div>
-            </a>
+    {{- /* O título do site ao lado do logo */ -}}
+    <div class="ml-3 text-xl font-black tracking-tight text-gray-100 uppercase">
+        {{ .Site.Title }}
+    </div>
+</a>
+            
             
             <button class="rounded-lg md:hidden focus:outline-none focus:shadow-outline" @click="open = !open" role="navigation" aria-expanded="false" aria-label="Main" aria-controls="menuItems">
                 <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
