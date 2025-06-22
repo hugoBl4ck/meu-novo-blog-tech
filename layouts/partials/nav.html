@@ -3,20 +3,17 @@
         <div class="flex flex-row items-center justify-between p-4">
 
             <a href="/" class="flex items-center text-gray-100 transition duration-1000 ease-in-out group">
-                
-                <a href="/" class="flex items-center text-gray-100 transition duration-1000 ease-in-out group">
-    
-    {{- /* Caixa com área de 32x32 pixels para o logo */ -}}
-    <div class="h-8 w-8 flex-shrink-0">
-        <img src="/images/site-logo.svg" class="h-full w-full" alt="{{ .Site.Title }} Logo" />
-    </div>
 
-    {{- /* O título do site ao lado do logo */ -}}
-    <div class="ml-3 text-xl font-black tracking-tight text-gray-100 uppercase">
-        {{ .Site.Title }}
-    </div>
-</a>
-            
+                {{- /* Caixa com área de 32x32 pixels para o logo */ -}}
+                <div class="h-8 w-8 flex-shrink-0">
+                    <img src="/images/site-logo.svg" class="h-full w-full" alt="{{ .Site.Title }} Logo" />
+                </div>
+
+                {{- /* O título do site ao lado do logo */ -}}
+                <div class="ml-3 text-xl font-black tracking-tight text-gray-100 uppercase">
+                    {{ .Site.Title }}
+                </div>
+            </a>
             
             <button class="rounded-lg md:hidden focus:outline-none focus:shadow-outline" @click="open = !open" role="navigation" aria-expanded="false" aria-label="Main" aria-controls="menuItems">
                 <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
@@ -29,7 +26,7 @@
             {{ range site.Menus.main }}
             {{ if (eq "complexdropdown" .Pre) }}
             <div @click.away="open = false" class="relative" x-data="{ open: false }">
-                <button @click="open = !open" class="flex flex-row items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:w-auto md:inline md:mt-0 md:ml-4 hover:text-white focus:text-white hover:bg-gray-600 focus:bg-gray-600 focus:outline-none focus:shadow-outline">
+                <button @click="open = !open" class="flex flex-row items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:w-auto md:inline md:mt-0 md:ml-4 hover:text-white focus:text-white hover:bg-gray-700 focus:bg-gray-600 focus:outline-none focus:shadow-outline">
                     <span>{{ .Name }}</span>
                     <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}" class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1">
                         <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
@@ -39,8 +36,8 @@
                     <div class="px-2 pt-2 pb-4 bg-white rounded-md shadow-lg text-zinc-900">
                         <div class="grid grid-cols-1 gap-4">
                             {{ range (index site.Menus .Identifier) }}
-                            <a class="flex items-start p-2 bg-transparent rounded-lg group row hover:text-white focus:text-white hover:bg-gray-600 focus:bg-primary-700 focus:outline-none focus:shadow-outline" href="{{ .URL | absLangURL }}">
-                                <div class="p-3 text-white rounded-lg bg-gray-600 group-hover:bg-gray-900">
+                            <a class="flex items-start p-2 bg-transparent rounded-lg group row hover:text-white focus:text-white hover:bg-gray-700 focus:bg-primary-700 focus:outline-none focus:shadow-outline" href="{{ .URL | absLangURL }}">
+                                <div class="p-3 text-white rounded-lg bg-primary-600 group-hover:bg-gray-900">
                                     {{ if (eq .Pre "stars") }}
                                     <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-4 h-4 md:h-6 md:w-6">
                                         <path d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z">
@@ -59,7 +56,6 @@
                                         </path>
                                     </svg>
                                     {{ end }}
-
                                 </div>
                                 <div class="ml-3">
                                     <p class="font-semibold">{{ .Name }}</p>
@@ -73,7 +69,7 @@
             </div>
             {{ else if (eq "dropdown" .Pre) }}
             <div @click.away="open = false" class="relative" x-data="{ open: false }">
-                <button @click="open = !open" class="flex flex-row items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg md:w-auto md:inline md:mt-0 md:ml-4 hover:text-white focus:text-white hover:bg-gray-600 focus:bg-gray-600 focus:outline-none focus:shadow-outline">
+                <button @click="open = !open" class="flex flex-row items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg md:w-auto md:inline md:mt-0 md:ml-4 hover:text-white focus:text-white hover:bg-gray-700 focus:bg-gray-600 focus:outline-none focus:shadow-outline">
                     <span>{{ .Name }}</span>
                     <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}" class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1">
                         <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
@@ -88,7 +84,7 @@
                 </div>
             </div>
             {{ else }}
-            <a class="px-4 py-2 mt-2 text-sm font-semibold rounded-lg md:mt-0 md:ml-4 hover:text-white focus:text-white hover:bg-gray-600 focus:bg-primary-700 focus:outline-none focus:shadow-outline" href="{{ .URL | absLangURL }}" title="{{ .Title | default .Name }}">
+            <a class="px-4 py-2 mt-2 text-sm font-semibold rounded-lg md:mt-0 md:ml-4 hover:text-white focus:text-white hover:bg-gray-700 focus:bg-gray-600 focus:outline-none focus:shadow-outline" href="{{ .URL | absLangURL }}" title="{{ .Title | default .Name }}">
                 {{ .Name }}
             </a>
             {{ end }}
