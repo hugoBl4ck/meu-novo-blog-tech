@@ -5,12 +5,13 @@ date: 2025-06-22T16:13:12-03:00
 description: "Aprenda sobre o Nuclei, uma poderosa ferramenta de varredura de vulnerabilidades baseada em templates. Descubra suas funções, como instalar e como usá-lo para automatizar a detecção de problemas de segurança em seus sistemas."
 keywords: ["Nuclei", "Segurança da Informação", "Vulnerabilidades", "Pentest", "Automação", "Templates", "ProjectDiscovery", "Hacking Ético", "DevSecOps", "Dicas de Segurança"]
 author: "Hugo Robot"
-images: ["images/posts/windows11-bypass2a.png"]
-
+images: 
+- "images/post/windows11-bypass2a.png"
 
 draft: false
 
-tags: ["Nuclei", "Segurança da Informação", "Vulnerabilidades", "Pentest", "Automação", "Templates", "ProjectDiscovery", "Hacking Ético", "DevSecOps", "Dicas de Segurança"] categories: ["Segurança", "Ferramentas", "Tutoriais"]
+tags: ["Nuclei", "Segurança da Informação", "Vulnerabilidades", "Pentest", "Automação", "Templates", "ProjectDiscovery", "Hacking Ético", "DevSecOps", "Dicas de Segurança"] 
+categories: ["Segurança", "Ferramentas", "Tutoriais"]
 ---
 
 ## Desvendando o Nuclei: Automação de Varreduras de Vulnerabilidades
