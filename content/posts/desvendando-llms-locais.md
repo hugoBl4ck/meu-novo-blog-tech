@@ -7,7 +7,8 @@ keywords: ["LLM local", "LM Studio", "IA sem censura", "modelos de linguagem loc
 author: "Hugo Robot" # Seu nome de autor
 
 
-images: ["images/posts/lmstudio-interface.png"] 
+images: 
+- "images/posts/lmstudio-interface.png"
 
 draft: false # <<== MUITO IMPORTANTE! Mude para 'false' quando estiver pronto para publicar. Se 'true', não aparecerá no site final (só com 'hugo server -D').
 
