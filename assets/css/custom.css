@@ -1,16 +1,5 @@
 /* assets/css/custom.css */
 
-/* --- CORES DE TÍTULO E CORPO DO POST --- */
-
-/* Título Principal do Post (H1 no template single.html) */
-article > header h1 {
-    color: #2d3748 !important; /* MODO CLARO: um cinza escuro para o título principal */
-    font-size: 2.5rem !important; /* Tamanho ajustado para o H1 principal */
-}
-.dark article > header h1 {
-    color: #e2e8f0 !important; /* MODO ESCURO: um cinza claro para o título principal */
-}
-
 /* Títulos H1 DENTRO do conteúdo .prose (do seu Markdown) */
 .prose h1 {
     color: #1a202c !important; /* MODO CLARO: um cinza bem escuro para H1 do conteúdo */
