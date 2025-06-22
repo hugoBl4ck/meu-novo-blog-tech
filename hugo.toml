@@ -204,8 +204,8 @@ enableInlineShortcodes = true # Permite shortcodes dentro de parágrafos
     image = "https://upload.wikimedia.org/wikipedia/commons/4/4e/Docker_%28container_engine%29_logo.svg"
     alt = "Docker"
   [[params.toolkit.logos]]
-    image = "https://projectdiscovery.io/images/logo-icon.svg"
-    alt = "Project Discovery (Nuclei)"
+    image = "https://www.svgrepo.com/show/330767/kalilinux.svg"
+    alt = "Kali Linux"
     invert_on_dark = true # Para inverter a cor do logo no modo escuro
   [[params.toolkit.logos]]
     image = "https://ollama.ai/public/ollama.png"
