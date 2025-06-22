@@ -5,9 +5,9 @@ date: 2025-06-22T16:13:12-03:00
 description: "Aprenda sobre o Nuclei, uma poderosa ferramenta de varredura de vulnerabilidades baseada em templates. Descubra suas funções, como instalar e como usá-lo para automatizar a detecção de problemas de segurança em seus sistemas."
 keywords: ["Nuclei", "Segurança da Informação", "Vulnerabilidades", "Pentest", "Automação", "Templates", "ProjectDiscovery", "Hacking Ético", "DevSecOps", "Dicas de Segurança"]
 author: "Hugo Robot"
-images: ["images/posts/lmstudio-interface.png"]
+images: ["images/posts/windows11-bypass2a.png"]
 
-"images/post/nuclei-automation.png" # Você pode substituir esta imagem por uma sua
+
 draft: false
 
 tags: ["Nuclei", "Segurança da Informação", "Vulnerabilidades", "Pentest", "Automação", "Templates", "ProjectDiscovery", "Hacking Ético", "DevSecOps", "Dicas de Segurança"] categories: ["Segurança", "Ferramentas", "Tutoriais"]
@@ -15,6 +15,8 @@ tags: ["Nuclei", "Segurança da Informação", "Vulnerabilidades", "Pentest", "A
 
 ## Desvendando o Nuclei: Automação de Varreduras de Vulnerabilidades
 Se você atua na área de segurança da informação, seja como pentester, analista de segurança ou desenvolvedor, provavelmente já se deparou com a necessidade de automatizar a busca por vulnerabilidades. É aí que entra o Nuclei, uma ferramenta poderosa e flexível que simplifica esse processo. Desenvolvido pela ProjectDiscovery, o Nuclei é um scanner de vulnerabilidades baseado em templates, permitindo a criação de verificações personalizadas para uma ampla gama de problemas de segurança.
+
+<img src="/images/post/windows11-bypass2a.png" alt="<Menina do blog>" style="max-width: 80%; height: auto; display: block; margin: 0 auto;">
 
 O que é o Nuclei?
 Em sua essência, o Nuclei é um motor de varredura rápido e personalizável, projetado para enviar requisições a vários alvos com base em templates definidos. Esses templates, escritos em YAML, são o coração do Nuclei. Eles descrevem as condições para identificar uma vulnerabilidade, como:
