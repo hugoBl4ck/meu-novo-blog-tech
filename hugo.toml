@@ -189,7 +189,27 @@ enableInlineShortcodes = true # Permite shortcodes dentro de parágrafos
     lang = "pt"
     loading = "lazy"
     title = "Deixe seu comentário!" # Título para a seção de comentários
+[params.toolkit]
+  heading = "Meu Kit de Ferramentas Principal"
+  subheading = "Estas são algumas das tecnologias e ferramentas que utilizo no meu dia a dia para pesquisa, desenvolvimento e automação."
+  
+  [params.toolkit.button]
+    text = "Ver projetos no GitHub"
+    url = "https://github.com/hugoBl4ck"
 
+  [[params.toolkit.logos]]
+    image = "https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg"
+    alt = "Python"
+  [[params.toolkit.logos]]
+    image = "https://upload.wikimedia.org/wikipedia/commons/4/4e/Docker_%28container_engine%29_logo.svg"
+    alt = "Docker"
+  [[params.toolkit.logos]]
+    image = "https://projectdiscovery.io/images/logo-icon.svg"
+    alt = "Project Discovery (Nuclei)"
+    invert_on_dark = true # Para inverter a cor do logo no modo escuro
+  [[params.toolkit.logos]]
+    image = "https://ollama.ai/public/ollama.png"
+    alt = "Ollama"
 # -----------------------------------------------------------------------------
 # Configuração de Menu
 # -----------------------------------------------------------------------------
