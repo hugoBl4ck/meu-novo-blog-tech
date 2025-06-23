@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://elaborate-scone-2651ee.netlify.app/sitemap.xml
