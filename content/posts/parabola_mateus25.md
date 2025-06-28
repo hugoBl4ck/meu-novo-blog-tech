@@ -6,6 +6,7 @@ keywords: ["Parábola dos Talentos", "Mateus 25", "Interpretação Bíblica", "T
 author: "Hugo Robot"
 images:
     - "images/post/sao-mateus.png"
+    - "images/post/sao-mateus-2.png"
 draft: false
 tags: ["Bíblia", "Teologia", "Parábolas", "História", "Grego Koiné"]
 categories: ["Religião", "Análise Crítica"]
