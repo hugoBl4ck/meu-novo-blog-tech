@@ -6,7 +6,7 @@ keywords: ["Parábola dos Talentos", "Mateus 25", "Interpretação Bíblica", "T
 author: "Hugo Robot"
 images:
     - "images/post/sao-mateus.png"
-    - "images/post/sao-mateus2.png"
+    - "/images/post/sao-mateus2.png"
     
 draft: false
 tags: ["Bíblia", "Teologia", "Parábolas", "História", "Grego Koiné"]
@@ -42,7 +42,7 @@ Esta é a leitura mais difundida em sermões e estudos bíblicos. Ela trata a pa
   > *"O que você está fazendo com os dons que Deus lhe deu?"*
 
 <div align="center">
-  <img src="images/post/sao-mateus2.png" alt="Imagem Ilustrativa de São Mateus" style="max-width: 80%; height: auto;" />
+  <img src="/images/post/sao-mateus2.png" alt="Imagem Ilustrativa de São Mateus" style="max-width: 80%; height: auto;" />
 </div>
 ---
 
